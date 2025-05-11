@@ -1,0 +1,3388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Programming for Visually Impaired Students</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.24.1/prism.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/prismjs@1.24.1/themes/prism.css" rel="stylesheet">
+    <style>
+        /* Accessibility Enhancements */
+        body {
+            font-size: 18px;
+            line-height: 1.8;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            font-weight: bold;
+            line-height: 1.3;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            color: #1a365d;
+            border-bottom: 4px solid #1a365d;
+            padding-bottom: 0.5rem;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            color: #2a4365;
+            border-bottom: 2px solid #2a4365;
+            padding-bottom: 0.3rem;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: #2c5282;
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            color: #2b6cb0;
+        }
+        
+        p {
+            margin-bottom: 1.2em;
+        }
+        
+        code {
+            font-family: Menlo, Monaco, Consolas, 'Courier New', monospace;
+            padding: 2px 4px;
+            background-color: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        pre {
+            background-color: #f8f8f8;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1em;
+            overflow-x: auto;
+            margin-bottom: 1.5em;
+            line-height: 1.5;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        ul, ol {
+            margin: 1em 0;
+            padding-left: 2em;
+        }
+        
+        li {
+            margin-bottom: 0.5em;
+        }
+        
+        .note {
+            background-color: #ebf8ff;
+            border-left: 4px solid #4299e1;
+            padding: 1em;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        
+        .warning {
+            background-color: #fffaf0;
+            border-left: 4px solid #ed8936;
+            padding: 1em;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        
+        .mcq-container {
+            background-color: #f0f4f8;
+            border: 1px solid #cbd5e0;
+            border-radius: 8px;
+            padding: 1.5em;
+            margin: 1.5em 0;
+        }
+        
+        .mcq-option {
+            margin: 0.5em 0;
+            padding: 0.5em;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            background-color: white;
+        }
+        
+        button {
+            background-color: #3182ce;
+            color: white;
+            padding: 0.5em 1em;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 1em;
+        }
+        
+        button:hover {
+            background-color: #2c5282;
+        }
+        
+        .correct-answer {
+            background-color: #c6f6d5;
+            border-color: #68d391;
+        }
+        
+        .wrong-answer {
+            background-color: #fed7d7;
+            border-color: #fc8181;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+        
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 0.75em;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f7fafc;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f7fafc;
+        }
+        
+        .exercise {
+            background-color: #e6fffa;
+            border-left: 4px solid #38b2ac;
+            padding: 1em;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        
+        .definition {
+            background-color: #faf5ff;
+            border-left: 4px solid #9f7aea;
+            padding: 1em;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        
+        .example {
+            background-color: #ebf4ff;
+            border: 1px solid #a3bffa;
+            padding: 1em;
+            margin: 1em 0;
+            border-radius: 4px;
+        }
+        
+        .keyboard {
+            background-color: #edf2f7;
+            color: #4a5568;
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            border: 1px solid #cbd5e0;
+            font-family: monospace;
+            font-size: 0.9em;
+        }
+        
+        /* Focus indicators for accessibility */
+        a:focus, button:focus, input:focus, [tabindex]:focus {
+            outline: 3px solid #63b3ed;
+            outline-offset: 2px;
+        }
+        
+        /* Skip to content link */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #2b6cb0;
+            color: white;
+            padding: 8px;
+            z-index: 100;
+            transition: top 0.3s;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Table of contents styling */
+        #toc {
+            background-color: #f7fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5em;
+            margin: 1.5em 0;
+        }
+        
+        #toc ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        #toc ul ul {
+            padding-left: 1.5em;
+        }
+        
+        #toc li {
+            margin-bottom: 0.3em;
+        }
+        
+        #toc a {
+            text-decoration: none;
+            color: #3182ce;
+        }
+        
+        #toc a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Enhanced focus styles for keyboard navigation */
+        a:focus, button:focus, input:focus, select:focus, textarea:focus {
+            outline: 3px solid #4A90E2;
+            outline-offset: 2px;
+        }
+        
+        /* Improved contrast for better readability */
+        .mcq-option {
+            background-color: #ffffff;
+            border: 2px solid #4A90E2;
+            border-radius: 8px;
+            padding: 12px 20px;
+            margin: 8px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .mcq-option:hover {
+            background-color: #E8F0FE;
+            transform: translateY(-2px);
+        }
+        
+        .mcq-option:focus {
+            background-color: #E8F0FE;
+            box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3);
+        }
+        
+        /* Improved feedback styles */
+        .feedback {
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 6px;
+            font-weight: bold;
+        }
+        
+        .correct-answer {
+            background-color: #E6F4EA !important;
+            border-color: #34A853 !important;
+        }
+        
+        .wrong-answer {
+            background-color: #FCE8E6 !important;
+            border-color: #EA4335 !important;
+        }
+        
+        /* Skip navigation link for keyboard users */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: #4A90E2;
+            color: white;
+            padding: 8px;
+            z-index: 100;
+        }
+        
+        .skip-link:focus {
+            top: 0;
+        }
+        
+        /* Improved code block accessibility */
+        pre {
+            background-color: #f5f5f5;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        pre code {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        /* ARIA live region for dynamic content */
+        [aria-live] {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <header role="banner">
+        <h1 id="top">Python Programming for Visually Impaired Students</h1>
+        <p>A comprehensive, screen reader-friendly guide to learning Python programming</p>
+    </header>
+    
+    <nav id="toc" role="navigation" aria-labelledby="toc-heading">
+        <h2 id="toc-heading">Table of Contents</h2>
+        <ul>
+            <li><a href="#introduction">Introduction to This Guide</a></li>
+            <li>
+                <a href="#chapter1">Chapter 1: Getting Started with Python</a>
+                <ul>
+                    <li><a href="#setting-up">Setting Up the Development Environment</a></li>
+                    <li><a href="#command-line">Understanding Command Line Interface</a></li>
+                    <li><a href="#first-program">Writing Your First Python Program</a></li>
+                    <li><a href="#chapter1-exercises">Exercises</a></li>
+                    <li><a href="#chapter1-mcq">Knowledge Check</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#chapter2">Chapter 2: Python Syntax, Variables, and Conditionals</a>
+                <ul>
+                    <li><a href="#operators">Mathematical Operators</a></li>
+                    <li><a href="#variables">Variables and Constants</a></li>
+                    <li><a href="#conditionals">Conditionals</a></li>
+                    <li><a href="#logical-operators">Logical and Conditional Operators</a></li>
+                    <li><a href="#chapter2-exercises">Exercises</a></li>
+                    <li><a href="#chapter2-mcq">Knowledge Check</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#chapter3">Chapter 3: Input/Output and Data Types</a>
+                <ul>
+                    <li><a href="#input-output">Accepting Input and Displaying Output</a></li>
+                    <li><a href="#data-types">Understanding Data Types</a></li>
+                    <li><a href="#type-casting">Type Casting</a></li>
+                    <li><a href="#chapter3-exercises">Exercises</a></li>
+                    <li><a href="#chapter3-mcq">Knowledge Check</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#chapter4">Chapter 4: Loops</a>
+                <ul>
+                    <li><a href="#for-loops">For Loops</a></li>
+                    <li><a href="#while-loops">While Loops</a></li>
+                    <li><a href="#break-statement">The Break Statement</a></li>
+                    <li><a href="#chapter4-exercises">Exercises</a></li>
+                    <li><a href="#chapter4-mcq">Knowledge Check</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#chapter5">Chapter 5: Advanced Data Structures</a>
+                <ul>
+                    <li><a href="#lists">Lists</a></li>
+                    <li><a href="#dictionaries">Dictionaries</a></li>
+                    <li><a href="#sets">Sets</a></li>
+                    <li><a href="#tuples">Tuples</a></li>
+                    <li><a href="#chapter5-exercises">Exercises</a></li>
+                    <li><a href="#chapter5-mcq">Knowledge Check</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#chapter6">Chapter 6: Functions</a>
+                <ul>
+                    <li><a href="#defining-functions">Defining Functions</a></li>
+                    <li><a href="#parameters">Parameters and Return Values</a></li>
+                    <li><a href="#built-in-functions">Built-in vs. User-Defined Functions</a></li>
+                    <li><a href="#importing">Importing Libraries</a></li>
+                    <li><a href="#chapter6-exercises">Exercises</a></li>
+                    <li><a href="#chapter6-mcq">Knowledge Check</a></li>
+                </ul>
+            </li>
+            <li><a href="#conclusion">Conclusion and Next Steps</a></li>
+        </ul>
+    </nav>
+    
+    <main id="main-content" role="main">
+        <section id="introduction">
+            <h2>Introduction to This Guide</h2>
+            <p>Welcome to our comprehensive Python programming guide designed specifically for visually impaired students. This textbook has been created with screen reader accessibility as a top priority. Each section is structured to provide clear explanations, relevant examples, and practical exercises to help reinforce your learning.</p>
+            
+            <p>Python is one of the most popular and versatile programming languages in the world. Its clear syntax and readability make it an excellent first programming language to learn. Throughout this guide, we will take you from the very basics of setting up a Python environment to more advanced topics such as functions and data structures.</p>
+            
+            <p>Each chapter builds upon the knowledge from previous chapters, so we recommend working through them in order. At the end of each chapter, you'll find practice exercises and multiple-choice questions to test your understanding.</p>
+            
+            <div class="note">
+                <h3>How to Use This Guide with a Screen Reader</h3>
+                <p>This guide is optimized for screen readers. Here are some tips to navigate effectively:</p>
+                <ul>
+                    <li>Use heading navigation (usually H key) to jump between sections</li>
+                    <li>Code examples are clearly marked and contained within pre and code tags</li>
+                    <li>All images have descriptive alt text</li>
+                    <li>Interactive elements like multiple-choice questions are keyboard accessible</li>
+                </ul>
+            </div>
+            
+            <p>Let's begin our Python programming journey!</p>
+        </section>
+        
+        <section id="chapter1">
+            <h2>Chapter 1: Getting Started with Python</h2>
+            <p>Python is a high-level, interpreted programming language known for its simplicity and readability. In this chapter, we'll help you set up your Python environment, understand the command line interface, and write your first Python program.</p>
+            
+            <section id="setting-up">
+                <h3>Setting Up the Development Environment</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Development Environment</h4>
+                    <p>A development environment is a setup of software tools and configurations that programmers use to write, test, and debug their code. For Python, this typically includes the Python interpreter and possibly an integrated development environment (IDE).</p>
+                </div>
+                
+                <p>There are two major versions of Python available today: Python 2 and Python 3. We will be working with Python 3, as it is the present and future of the language. Python 2 reached its end of life in January 2020.</p>
+                
+                <h4>Installing Python with Anaconda</h4>
+                <p>Anaconda is a distribution of Python and R for scientific computing that makes it easy to install Python and many useful packages. We recommend using Anaconda for this course because it simplifies package management.</p>
+                
+                <h5>For Windows 8 and up:</h5>
+                <ol>
+                    <li>Visit the Anaconda installation page at <a href="https://docs.anaconda.com/anaconda/install/windows/" target="_blank">https://docs.anaconda.com/anaconda/install/windows/</a></li>
+                    <li>Follow the detailed installation instructions. For beginners, we recommend accepting all the default settings.</li>
+                    <li>After installation, restart your computer for changes to take effect.</li>
+                </ol>
+                
+                <h5>For Windows 7 or lower:</h5>
+                <ol>
+                    <li>You'll need to download an older version of Anaconda from the archives at <a href="https://repo.anaconda.com/archive/" target="_blank">https://repo.anaconda.com/archive/</a></li>
+                    <li>Look for "Anaconda2-2019.10-Windows-x86.exe" (for 32-bit systems) or "Anaconda2-2019.10-Windows-x86_64.exe" (for 64-bit systems).</li>
+                    <li>Follow the installation process and restart your computer afterward.</li>
+                </ol>
+                
+                <h5>For macOS:</h5>
+                <ol>
+                    <li>Visit <a href="https://docs.anaconda.com/anaconda/install/mac-os/" target="_blank">https://docs.anaconda.com/anaconda/install/mac-os/</a></li>
+                    <li>Download the graphical installer and follow the instructions.</li>
+                    <li>Restart your computer after installation.</li>
+                </ol>
+                
+                <h5>For Linux:</h5>
+                <ol>
+                    <li>Visit <a href="https://docs.anaconda.com/anaconda/install/linux/" target="_blank">https://docs.anaconda.com/anaconda/install/linux/</a></li>
+                    <li>Follow the command-line installation instructions for your specific Linux distribution.</li>
+                </ol>
+                
+                <div class="note">
+                    <h4>Note for Screen Reader Users:</h4>
+                    <p>During installation, you might encounter graphical elements. If you need assistance, consider asking a sighted person for help with the visual aspects of the installation process. Once installed, Python can be fully used with screen readers through the command line interface.</p>
+                </div>
+                
+                <p>After installation, Python will be available on your computer along with numerous helpful libraries and packages that come with the Anaconda distribution.</p>
+            </section>
+            
+            <section id="command-line">
+                <h3>Understanding Command Line Interface (CLI)</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Command Line Interface (CLI)</h4>
+                    <p>A Command Line Interface is a text-based interface used to interact with software and operating systems by typing commands. In contrast to a Graphical User Interface (GUI) that uses visual elements like icons and buttons, CLI relies entirely on text input and output.</p>
+                </div>
+                
+                <p>There are generally two types of interfaces:</p>
+                <ul>
+                    <li><strong>Character User Interface (CUI)</strong>: Also known as Command Line Interface, where all computer actions are performed using textual commands.</li>
+                    <li><strong>Graphical User Interface (GUI)</strong>: What most people commonly use on their computers, consisting of icons, windows, and visual elements that can be interacted with.</li>
+                </ul>
+                
+                <p>For Python programming, we'll primarily use the command prompt (or terminal) to run our code and interact with the Python interpreter.</p>
+                
+                <h4>Launching the Command Prompt</h4>
+                <ol>
+                    <li><strong>On Windows</strong>: Search for "cmd" in the Windows search. You'll hear "command prompt." Press Enter to launch it. If you prefer the Anaconda prompt, search for "anaconda" and select "Anaconda Prompt."</li>
+                    <li><strong>Alternative method</strong>: Press <span class="keyboard">Win+R</span> to open the "Run" dialog box, type "cmd" and hit Enter.</li>
+                    <li><strong>On macOS</strong>: Press <span class="keyboard">Command+Space</span> to open Spotlight, then type "terminal" and press Enter.</li>
+                    <li><strong>On Linux</strong>: The keyboard shortcut varies by distribution, but typically <span class="keyboard">Ctrl+Alt+T</span> will open a terminal window.</li>
+                </ol>
+                
+                <h4>Basic Command Line Navigation</h4>
+                <p>Once you've opened the command prompt, here are some basic commands to help you navigate:</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Command</th>
+                            <th>Windows</th>
+                            <th>macOS/Linux</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Current Directory</td>
+                            <td>cd</td>
+                            <td>pwd</td>
+                            <td>Shows your current location in the file system</td>
+                        </tr>
+                        <tr>
+                            <td>List Files/Directories</td>
+                            <td>dir</td>
+                            <td>ls</td>
+                            <td>Lists files and directories in the current location</td>
+                        </tr>
+                        <tr>
+                            <td>Change Directory</td>
+                            <td>cd [path]</td>
+                            <td>cd [path]</td>
+                            <td>Navigate to a different directory</td>
+                        </tr>
+                        <tr>
+                            <td>Go Up One Directory</td>
+                            <td>cd ..</td>
+                            <td>cd ..</td>
+                            <td>Move up one level in the directory structure</td>
+                        </tr>
+                        <tr>
+                            <td>Clear Screen</td>
+                            <td>cls</td>
+                            <td>clear</td>
+                            <td>Clears the terminal screen</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="example">
+                    <h4>Example: Using the Command Line</h4>
+                    <p>Here's a sequence of commands you might use to navigate to a folder and run a Python script:</p>
+                    <pre><code># On Windows
+# Check current directory
+cd
+# Output might be: C:\Users\YourUsername
+
+# Change to a specific directory
+cd Documents\PythonProjects
+
+# List files in the directory
+dir
+# Output might show: helloWorld.py and other files
+
+# Run a Python script
+python helloWorld.py
+# Output: Hello world</code></pre>
+                </div>
+                
+                <div class="note">
+                    <h4>Tip for Screen Reader Users:</h4>
+                    <p>Command line interfaces work extremely well with screen readers because they are text-based. Your screen reader will read each line of output as it appears. Use the up and down arrow keys to navigate through command history.</p>
+                </div>
+            </section>
+            
+            <section id="first-program">
+                <h3>Writing Your First Python Program</h3>
+                
+                <p>Now let's write our first Python program - the traditional "Hello, World!" program that simply outputs a greeting to the console.</p>
+                
+                <h4>Creating the Program File</h4>
+                <ol>
+                    <li>Open a text editor (like Notepad on Windows, TextEdit on Mac, or any accessible editor you prefer)</li>
+                    <li>Type the following line of code:
+                        <pre><code>print("Hello, World!")</code></pre>
+                    </li>
+                    <li>Save the file with the name "helloWorld.py" (the ".py" extension is important as it identifies the file as a Python script)</li>
+                </ol>
+                
+                <div class="definition">
+                    <h4>Understanding the Code</h4>
+                    <p><code>print()</code> is a built-in Python function that outputs whatever is inside the parentheses to the console (command prompt). The text inside the quotation marks is called a string, which is a sequence of characters.</p>
+                </div>
+                
+                <h4>Running Your Program</h4>
+                <ol>
+                    <li>Open the command prompt/terminal</li>
+                    <li>Navigate to the directory where you saved "helloWorld.py"</li>
+                    <li>Type the following command and press Enter:
+                        <pre><code>python helloWorld.py</code></pre>
+                    </li>
+                    <li>You should see the output: <code>Hello, World!</code></li>
+                </ol>
+                
+                <p>Congratulations! You've just written and executed your first Python program.</p>
+                
+                <h4>Understanding Python's Interactive Mode</h4>
+                <p>Python also has an interactive mode that allows you to write and execute code line by line. This is useful for testing small code snippets and learning Python syntax.</p>
+                
+                <ol>
+                    <li>Open the command prompt/terminal</li>
+                    <li>Type <code>python</code> and press Enter</li>
+                    <li>You'll enter the Python interpreter, indicated by the primary prompt: <code>>>></code></li>
+                    <li>Try typing: <code>print("Hello from interactive mode!")</code> and press Enter</li>
+                    <li>You'll see the output immediately</li>
+                    <li>To exit the interactive mode, type <code>exit()</code> or press <span class="keyboard">Ctrl+Z</span> on Windows or <span class="keyboard">Ctrl+D</span> on macOS/Linux, then Enter</li>
+                </ol>
+                
+                <div class="example">
+                    <h4>Example: Python Interactive Mode</h4>
+                    <pre><code>>>> print("Hello from interactive mode!")
+Hello from interactive mode!
+>>> 2 + 3
+5
+>>> name = "Python Learner"
+>>> print(name)
+Python Learner
+>>> exit()</code></pre>
+                </div>
+            </section>
+            
+            <section id="chapter1-exercises">
+                <h3>Exercises</h3>
+                
+                <div class="exercise">
+                    <h4>Exercise 1.1: Setup Verification</h4>
+                    <p>Create a Python script that prints the version of Python you're using. Save the file as "version_check.py" with the following code:</p>
+                    <pre><code>import sys
+print("Python version:")
+print(sys.version)
+print("Version info:")
+print(sys.version_info)</code></pre>
+                    <p>Run the script and verify that you're using Python 3.x.</p>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 1.2: Print Statements</h4>
+                    <p>Create a Python script that prints each of the following on separate lines:</p>
+                    <ol>
+                        <li>"It's exciting to learn programming"</li>
+                        <li>"I'm looking forward to the next chapter"</li>
+                        <li>Your name and a personal goal for learning Python</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 1.3: Command Line Navigation</h4>
+                    <p>Practice using the command line by doing the following:</p>
+                    <ol>
+                        <li>Create a new directory called "PythonLearning"</li>
+                        <li>Navigate into that directory</li>
+                        <li>Create a Python script called "navigation.py" that prints "I created this file in my PythonLearning directory!"</li>
+                        <li>Run the script from the command line</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 1.4: Multi-line Output</h4>
+                    <p>Create a Python script that prints a simple pattern using multiple print statements. For example:</p>
+                    <pre><code>print("*")
+print("**")
+print("***")
+print("****")
+print("*****")</code></pre>
+                    <p>When run, this should create a right-aligned triangle pattern made of asterisks.</p>
+                </div>
+            </section>
+            
+            <section id="chapter1-mcq">
+                <h3>Knowledge Check</h3>
+                
+                <div class="mcq-container">
+                    <h4>Question 1: What is the correct command to run a Python script named "program.py"?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) run program.py</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">B) python program.py</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) execute program.py</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) start program.py</div>
+                    <div id="feedback1" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 2: Which of the following is NOT a way to launch the command prompt in Windows?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) Searching for "cmd" in the Windows search</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) Using the Run dialog with "cmd" command</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) Right-clicking on the Start button and selecting "Command Prompt"</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">D) Pressing Ctrl+P</div>
+                    <div id="feedback2" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 3: What is the output of the following code?</h4>
+                    <pre><code>print("Hello" + " " + "World")</code></pre>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) Hello World (on two separate lines)</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">B) Hello World</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) "Hello World"</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) Hello + World</div>
+                    <div id="feedback3" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 4: Which statement about Python is TRUE?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) Python 2 is the recommended version for new projects</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) Python files use the .pyt extension</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">C) Python is an interpreted programming language</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) Python requires a special IDE and cannot run from the command line</div>
+                    <div id="feedback4" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 5: How do you exit the Python interactive mode?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) Type "quit"</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) Press Alt+F4</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">C) Type exit() or use Ctrl+Z (Windows) or Ctrl+D (macOS/Linux)</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) Type "stop"</div>
+                    <div id="feedback5" class="hidden"></div>
+                </div>
+            </section>
+        </section>
+        
+        <section id="chapter2">
+            <h2>Chapter 2: Python Syntax, Variables, and Conditionals</h2>
+            <p>In this chapter, we'll explore Python syntax, mathematical operators, variables, and conditional statements. These are the fundamental building blocks that will allow you to write more complex and useful programs.</p>
+            
+            <section id="operators">
+                <h3>Mathematical Operators</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Operators</h4>
+                    <p>Operators are special symbols that perform operations on variables and values. Mathematical operators perform arithmetic operations similar to those you would use in basic mathematics.</p>
+                </div>
+                
+                <p>Python includes all the standard mathematical operators you would expect. Let's explore them using Python's interactive mode.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Name</th>
+                            <th>Example</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>+</td>
+                            <td>Addition</td>
+                            <td>5 + 3</td>
+                            <td>8</td>
+                        </tr>
+                        <tr>
+                            <td>-</td>
+                            <td>Subtraction</td>
+                            <td>5 - 3</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>*</td>
+                            <td>Multiplication</td>
+                            <td>5 * 3</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td>/</td>
+                            <td>Division</td>
+                            <td>5 / 3</td>
+                            <td>1.6666666666666667</td>
+                        </tr>
+                        <tr>
+                            <td>//</td>
+                            <td>Floor Division</td>
+                            <td>5 // 3</td>
+                            <td>1</td>
+                        </tr>
+                        <tr>
+                            <td>%</td>
+                            <td>Modulo (Remainder)</td>
+                            <td>5 % 3</td>
+                            <td>2</td>
+                        </tr>
+                        <tr>
+                            <td>**</td>
+                            <td>Exponentiation</td>
+                            <td>5 ** 3</td>
+                            <td>125</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="example">
+                    <h4>Example: Using Mathematical Operators in Interactive Mode</h4>
+                    <pre><code>>>> 10 + 5
+15
+>>> 10 - 5
+5
+>>> 10 * 5
+50
+>>> 10 / 5
+2.0
+>>> 10 // 3  # Floor division (returns the integer part of the division)
+3
+>>> 10 % 3  # Modulo (returns the remainder of the division)
+1
+>>> 10 ** 2  # Exponentiation (10 raised to the power of 2)
+100</code></pre>
+                </div>
+                
+                <h4>Operator Precedence: BODMAS Rule</h4>
+                <p>Python follows the BODMAS rule for the order of operations:</p>
+                <ol>
+                    <li><strong>B</strong>rackets (Parentheses in programming)</li>
+                    <li><strong>O</strong>rders (Exponents/Powers)</li>
+                    <li><strong>D</strong>ivision and <strong>M</strong>ultiplication (from left to right)</li>
+                    <li><strong>A</strong>ddition and <strong>S</strong>ubtraction (from left to right)</li>
+                </ol>
+                
+                <div class="example">
+                    <h4>Example: Order of Operations</h4>
+                    <pre><code>>>> 2 + 3 * 4
+14  # Multiplication happens before addition
+
+>>> (2 + 3) * 4
+20  # Parentheses are evaluated first
+
+>>> 2 ** 3 + 4
+12  # Exponentiation happens before addition
+
+>>> 2 ** (3 + 4)
+128  # Parentheses are evaluated first</code></pre>
+                </div>
+                
+                <h4>Using Mathematical Functions</h4>
+                <p>Python's math library provides additional mathematical functions and constants.</p>
+                
+                <div class="example">
+                    <h4>Example: Using the Math Library</h4>
+                    <pre><code>>>> import math  # Import the math library
+
+>>> math.sqrt(16)  # Square root function
+4.0
+
+>>> math.log10(100)  # Base-10 logarithm
+2.0
+
+>>> math.sin(math.pi / 2)  # Sine of 90 degrees (π/2 radians)
+1.0
+
+>>> math.cos(0)  # Cosine of 0 degrees
+1.0
+
+>>> math.pi  # The constant π
+3.141592653589793</code></pre>
+                </div>
+            </section>
+            
+            <section id="variables">
+                <h3>Variables and Constants</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Variables</h4>
+                    <p>Variables are named storage locations that can hold data values. They allow you to store, retrieve, and manipulate data throughout your program.</p>
+                </div>
+                
+                <h4>Creating and Using Variables</h4>
+                <p>In Python, you create a variable by assigning a value to it using the assignment operator (=).</p>
+                
+                <div class="example">
+                    <h4>Example: Variable Assignment</h4>
+                    <pre><code>>>> age = 25  # Creating a variable called 'age' and assigning the value 25 to it
+>>> name = "Alice"  # Creating a variable called 'name' with a string value
+>>> is_student = True  # Creating a boolean variable
+
+>>> age  # Retrieving the value
+25
+>>> name
+'Alice'
+>>> is_student
+True</code></pre>
+                </div>
+                
+                <p>Variables can be reassigned to different values at any time:</p>
+                
+                <div class="example">
+                    <h4>Example: Reassigning Variables</h4>
+                    <pre><code>>>> age = 25
+>>> age
+25
+>>> age = 26  # Reassigning a new value
+>>> age
+26</code></pre>
+                </div>
+                
+                <h4>Variable Naming Rules</h4>
+                <p>When naming your variables in Python, follow these rules:</p>
+                <ul>
+                    <li>Variable names can contain letters, numbers, and underscores</li>
+                    <li>Variable names must start with a letter or an underscore</li>
+                    <li>Variable names cannot start with a number</li>
+                    <li>Variable names are case-sensitive (age, Age, and AGE are different variables)</li>
+                    <li>Variable names cannot be Python keywords (like <code>if</code>, <code>for</code>, <code>while</code>, etc.)</li>
+                </ul>
+                
+                <div class="example">
+                    <h4>Example: Valid and Invalid Variable Names</h4>
+                    <pre><code># Valid variable names
+name = "John"
+age_2 = 30
+_private = "Hidden value"
+firstName = "Jane"
+first_name = "Jane"
+
+# Invalid variable names
+# 2age = 30  # Cannot start with a number
+# first-name = "Jane"  # Hyphens are not allowed
+# if = "Reserved"  # Cannot use Python keywords</code></pre>
+                </div>
+                
+                <h4>Constants</h4>
+                <p>Constants are similar to variables, but their values are not meant to change throughout the program.</p>
+                
+                <p>Python doesn't have built-in constant types, but there's a convention to use all uppercase letters to indicate that a variable should be treated as a constant.</p>
+                
+                <div class="example">
+                    <h4>Example: Using Constants (By Convention)</h4>
+                    <pre><code>PI = 3.14159
+MAX_USERS = 100
+DATABASE_URL = "mongodb://localhost:27017"
+
+# Later in your code, you shouldn't change these values
+# PI = 3.14  # This would be misleading and against convention</code></pre>
+                </div>
+                
+                <div class="note">
+                    <h4>Note for Screen Reader Users:</h4>
+                    <p>When reading Python code with a screen reader, it's helpful to know that variables with underscores might be read differently by different screen readers. For example, <code>first_name</code> might be read as "first underscore name." Understanding this will help you follow along with code examples and write your own code.</p>
+                </div>
+            </section>
+            
+            <section id="conditionals">
+                <h3>Conditionals</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Conditional Statements</h4>
+                    <p>Conditional statements allow your program to make decisions based on certain conditions. They enable your code to execute different blocks of code depending on whether a condition is True or False.</p>
+                </div>
+                
+                <h4>The if Statement</h4>
+                <p>The <code>if</code> statement is the most basic form of conditional statement in Python. It executes a block of code only if a specified condition is True.</p>
+                
+                <div class="example">
+                    <h4>Example: Basic if Statement</h4>
+                    <pre><code>age = 18
+
+if age >= 18:
+    print("You are an adult")
+    print("You can vote")
+    
+# Output: 
+# You are an adult
+# You can vote</code></pre>
+                </div>
+                
+                <h4>The if-else Statement</h4>
+                <p>The <code>if-else</code> statement provides an alternative block of code to execute if the condition is False.</p>
+                
+                <div class="example">
+                    <h4>Example: if-else Statement</h4>
+                    <pre><code>age = 16
+
+if age >= 18:
+    print("You are an adult")
+    print("You can vote")
+else:
+    print("You are not yet an adult")
+    print("You cannot vote")
+    
+# Output: 
+# You are not yet an adult
+# You cannot vote</code></pre>
+                </div>
+                
+                <h4>The if-elif-else Statement</h4>
+                <p>The <code>elif</code> (short for "else if") statement allows you to check multiple conditions in sequence.</p>
+                
+                <div class="example">
+                    <h4>Example: if-elif-else Statement</h4>
+                    <pre><code>score = 85
+
+if score >= 90:
+    print("Grade: A")
+elif score >= 80:
+    print("Grade: B")
+elif score >= 70:
+    print("Grade: C")
+elif score >= 60:
+    print("Grade: D")
+else:
+    print("Grade: F")
+    
+# Output: Grade: B</code></pre>
+                </div>
+                
+                <h4>Nested Conditional Statements</h4>
+                <p>You can also nest conditional statements within other conditional statements.</p>
+                
+                <div class="example">
+                    <h4>Example: Nested Conditionals</h4>
+                    <pre><code>age = 20
+has_id = True
+
+if age >= 18:
+    if has_id:
+        print("You can enter the venue and purchase alcohol")
+    else:
+        print("You can enter the venue but cannot purchase alcohol")
+else:
+    print("You cannot enter the venue")
+    
+# Output: You can enter the venue and purchase alcohol</code></pre>
+                </div>
+                
+                <div class="note">
+                    <h4>Note About Indentation:</h4>
+                    <p>Python uses indentation (whitespace at the beginning of a line) to define blocks of code. This is different from many other programming languages that use braces {} for this purpose.</p>
+                    <p>For screen reader users, each indentation level is typically 4 spaces or a tab. When writing code, be consistent with your indentation to avoid syntax errors.</p>
+                </div>
+            </section>
+            
+            <section id="logical-operators">
+                <h3>Logical and Conditional Operators</h3>
+                
+                <h4>Conditional (Comparison) Operators</h4>
+                <p>Conditional operators are used to compare values and return True or False.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Name</th>
+                            <th>Example</th>
+                            <th>Result</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>==</td>
+                            <td>Equal to</td>
+                            <td>5 == 5</td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td>!=</td>
+                            <td>Not equal to</td>
+                            <td>5 != 3</td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td>&gt;</td>
+                            <td>Greater than</td>
+                            <td>5 &gt; 3</td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;</td>
+                            <td>Less than</td>
+                            <td>5 &lt; 3</td>
+                            <td>False</td>
+                        </tr>
+                        <tr>
+                            <td>&gt;=</td>
+                            <td>Greater than or equal to</td>
+                            <td>5 &gt;= 5</td>
+                            <td>True</td>
+                        </tr>
+                        <tr>
+                            <td>&lt;=</td>
+                            <td>Less than or equal to</td>
+                            <td>5 &lt;= 3</td>
+                            <td>False</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="example">
+                    <h4>Example: Using Conditional Operators</h4>
+                    <pre><code>>>> 5 == 5
+True
+>>> 5 != 5
+False
+>>> 5 > 3
+True
+>>> 5 < 3
+False
+>>> 5 >= 5
+True
+>>> 5 <= 3
+False</code></pre>
+                </div>
+                
+                <h4>Logical Operators</h4>
+                <p>Logical operators are used to combine multiple conditions.</p>
+                
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Operator</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>and</td>
+                            <td>Returns True if both statements are true</td>
+                            <td>x &gt; 5 and x &lt; 10</td>
+                        </tr>
+                        <tr>
+                            <td>or</td>
+                            <td>Returns True if one of the statements is true</td>
+                            <td>x &gt; 5 or x &lt; 3</td>
+                        </tr>
+                        <tr>
+                            <td>not</td>
+                            <td>Reverses the result, returns False if the result is true</td>
+                            <td>not(x &gt; 5)</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <div class="example">
+                    <h4>Example: Using Logical Operators</h4>
+                    <pre><code>>>> age = 25
+>>> has_license = True
+
+>>> age >= 18 and has_license
+True  # Both conditions are true
+
+>>> age < 18 or has_license
+True  # At least one condition is true
+
+>>> not has_license
+False  # The original value is True, so not True is False
+
+>>> not (age < 18)
+True  # The expression (age < 18) is False, so not False is True</code></pre>
+                </div>
+                
+                <h4>Combining Conditional and Logical Operators</h4>
+                <p>You can create complex conditions by combining conditional and logical operators.</p>
+                
+                <div class="example">
+                    <h4>Example: Complex Conditions</h4>
+                    <pre><code>age = 25
+income = 45000
+has_degree = True
+
+# Check if someone qualifies for a loan
+if (age >= 21 and age <= 60) and (income >= 30000 or has_degree):
+    print("You qualify for a loan")
+else:
+    print("You don't qualify for a loan")
+    
+# Output: You qualify for a loan</code></pre>
+                </div>
+            </section>
+            
+            <section id="chapter2-exercises">
+                <h3>Exercises</h3>
+                
+                <div class="exercise">
+                    <h4>Exercise 2.1: Variable Practice</h4>
+                    <p>Create a Python script that:</p>
+                    <ol>
+                        <li>Creates variables for your name, age, and whether you are a student (boolean)</li>
+                        <li>Creates a constant for the current year</li>
+                        <li>Calculates and stores the year you were born (using the current year and your age)</li>
+                        <li>Prints all this information in a formatted sentence</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 2.2: Math Operations</h4>
+                    <p>Write a program that calculates and prints the following:</p>
+                    <ol>
+                        <li>The area and perimeter of a rectangle with length 7 and width 5</li>
+                        <li>The area and circumference of a circle with radius 3 (use 3.14 for π)</li>
+                        <li>The volume of a sphere with radius 4 (use 3.14 for π)</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 2.3: Conditional Logic</h4>
+                    <p>Write a program that assigns a letter grade based on a score:</p>
+                    <ul>
+                        <li>A: 90-100</li>
+                        <li>B: 80-89</li>
+                        <li>C: 70-79</li>
+                        <li>D: 60-69</li>
+                        <li>F: Below 60</li>
+                    </ul>
+                    <p>Test your program with scores of 95, 83, 75, 65, and 55.</p>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 2.4: Complex Conditionals</h4>
+                    <p>Write a program that determines whether a year is a leap year. A leap year is:</p>
+                    <ul>
+                        <li>Divisible by 4 AND</li>
+                        <li>Either NOT divisible by 100 OR divisible by 400</li>
+                    </ul>
+                    <p>Test your program with the years: 1900, 2000, 2020, 2023, and 2024.</p>
+                </div>
+            </section>
+            
+            <section id="chapter2-mcq">
+                <h3>Knowledge Check</h3>
+                
+                <div class="mcq-container">
+                    <h4>Question 1: What is the result of 7 // 3 in Python?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) 2.33</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">B) 2</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) 2.5</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) 3</div>
+                    <div id="feedback6" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 2: Which of the following is NOT a valid variable name in Python?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) my_var</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) _count</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) totalSum</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">D) 2ndPlace</div>
+                    <div id="feedback7" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 3: What will be the output of the following code?</h4>
+                    <pre><code>x = 5
+if x > 3:
+    print("A")
+elif x > 4:
+    print("B")
+else:
+    print("C")</code></pre>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">A) A</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) B</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) C</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) Both A and B</div>
+                    <div id="feedback8" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 4: What is the result of the expression: 3 + 4 * 2 / 2?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) 3.5</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) 7</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">C) 7.0</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) 14</div>
+                    <div id="feedback9" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 5: What is the result of the expression: True and False or True?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">A) True</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) False</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) Error</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) None</div>
+                    <div id="feedback10" class="hidden"></div>
+                </div>
+            </section>
+        </section>
+        
+        <section id="chapter3">
+            <h2>Chapter 3: Input/Output and Data Types</h2>
+            <p>In this chapter, we'll learn how to accept input from users, display output, and understand the different data types available in Python. These skills are essential for creating interactive programs.</p>
+            
+            <section id="input-output">
+                <h3>Accepting Input and Displaying Output</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Input/Output (I/O)</h4>
+                    <p>Input/Output (I/O) refers to the communication between a program and the outside world. Input is data provided to the program, while output is data produced by the program.</p>
+                </div>
+                
+                <h4>The input() Function</h4>
+                <p>The <code>input()</code> function allows your program to accept input from the user through the keyboard. When the function is called, the program pauses and waits for the user to type something and press Enter.</p>
+                
+                <div class="example">
+                    <h4>Example: Basic Input</h4>
+                    <pre><code>name = input("Enter your name: ")
+print("Hello, " + name + "!")</code></pre>
+                    <p>When this program runs, it will display "Enter your name: " and wait for the user to type their name. After the user enters their name and presses Enter, it will greet them.</p>
+                </div>
+                
+                <div class="note">
+                    <h4>Important Note for Screen Reader Users</h4>
+                    <p>When using input(), your screen reader should announce the prompt text and then enter edit mode, allowing you to type your input. After pressing Enter, the screen reader should continue reading the next output.</p>
+                </div>
+                
+                <h4>The print() Function</h4>
+                <p>The <code>print()</code> function sends output to the console. It can display strings, variables, numbers, and the results of expressions.</p>
+                
+                <div class="example">
+                    <h4>Example: Various Ways to Use print()</h4>
+                    <pre><code># Printing a simple string
+print("Hello, World!")
+
+# Printing a variable
+name = "Alice"
+print(name)
+
+# Printing multiple items (automatically adds spaces between items)
+print("Hello", name, "Welcome to Python!")
+
+# Printing with formatted strings (f-strings in Python 3.6+)
+age = 30
+print(f"{name} is {age} years old.")
+
+# Printing expressions
+print("2 + 3 =", 2 + 3)</code></pre>
+                </div>
+                
+                <h4>Advanced print() Features</h4>
+                <p>The <code>print()</code> function has additional parameters that can be useful:</p>
+                
+                <div class="example">
+                    <h4>Example: Advanced print() Parameters</h4>
+                    <pre><code># Changing the end character (default is newline)
+print("Hello", end=" ")
+print("World")  # Outputs: Hello World
+
+# Changing the separator between items
+print("Apple", "Banana", "Cherry", sep=", ")  # Outputs: Apple, Banana, Cherry
+
+# Combining both
+print("One", "Two", "Three", sep=" - ", end="!\n")  # Outputs: One - Two - Three!</code></pre>
+                </div>
+                
+                <h4>Creating Interactive Programs</h4>
+                <p>By combining <code>input()</code> and <code>print()</code>, you can create interactive programs that respond to user input.</p>
+                
+                <div class="example">
+                    <h4>Example: A Simple Calculator</h4>
+                    <pre><code># Simple calculator that adds two numbers
+print("Welcome to the Simple Calculator")
+print("------------------------------")
+
+# Get input from user
+num1 = input("Enter the first number: ")
+num2 = input("Enter the second number: ")
+
+# Convert string input to numbers
+num1 = float(num1)
+num2 = float(num2)
+
+# Perform calculation and display result
+sum_result = num1 + num2
+print(f"The sum of {num1} and {num2} is {sum_result}")</code></pre>
+                </div>
+            </section>
+            
+            <section id="data-types">
+                <h3>Understanding Data Types</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Data Types</h4>
+                    <p>Data types specify what kind of data can be stored and manipulated within a program. Each data type has specific operations that can be performed on it and occupies a different amount of memory.</p>
+                </div>
+                
+                <p>Python has several built-in data types. Here are the most common ones:</p>
+                
+                <h4>1. Numbers</h4>
+                <p>Python has three numeric types:</p>
+                <ul>
+                    <li><strong>int (Integer)</strong>: Whole numbers without decimal points, like -5, 0, 100</li>
+                    <li><strong>float (Floating-point)</strong>: Numbers with decimal points, like 3.14, -0.001, 2.0</li>
+                    <li><strong>complex</strong>: Numbers with a real and imaginary part, like 3+2j (less commonly used)</li>
+                </ul>
+                
+                <div class="example">
+                    <h4>Example: Numbers</h4>
+                    <pre><code># Integers
+x = 10
+negative_num = -5
+
+# Floats
+pi = 3.14159
+small_num = 1.0e-4  # Scientific notation: 0.0001
+
+# Operations
+sum_result = x + pi  # Adding an int and a float results in a float
+print(sum_result)  # Output: 13.14159
+
+# Type checking
+print(type(x))  # Output: <class 'int'>
+print(type(pi))  # Output: <class 'float'></code></pre>
+                </div>
+                
+                <h4>2. Strings</h4>
+                <p>Strings are sequences of characters, enclosed in single quotes ('), double quotes ("), or triple quotes (''' or """).</p>
+                
+                <div class="example">
+                    <h4>Example: Strings</h4>
+                    <pre><code># Different ways to define strings
+name = "Alice"
+message = 'Hello, Python!'
+paragraph = """This is a multi-line
+string that can span
+multiple lines."""
+
+# String operations
+greeting = "Hello, " + name + "!"  # Concatenation
+print(greeting)  # Output: Hello, Alice!
+
+repeated = "Python " * 3  # Repetition
+print(repeated)  # Output: Python Python Python
+
+# String methods
+print(name.upper())  # Output: ALICE
+print(message.lower())  # Output: hello, python!
+print(len(name))  # Output: 5 (length of the string)</code></pre>
+                </div>
+                
+                <h4>3. Boolean</h4>
+                <p>Boolean type can have only two values: <code>True</code> or <code>False</code>. They're often the result of comparisons and are used in conditional logic.</p>
+                
+                <div class="example">
+                    <h4>Example: Boolean</h4>
+                    <pre><code># Boolean values
+is_active = True
+has_permission = False
+
+# Comparison operations return boolean values
+is_adult = age >= 18  # True if age is 18 or more, otherwise False
+
+# Logical operations with booleans
+can_access = is_active and has_permission  # Logical AND
+print(can_access)  # Output: False
+
+needs_attention = not is_active or not has_permission  # Logical OR with NOT
+print(needs_attention)  # Output: True</code></pre>
+                </div>
+                
+                <h4>4. None Type</h4>
+                <p>The <code>None</code> type has only one value: <code>None</code>. It represents the absence of a value or a null value.</p>
+                
+                <div class="example">
+                    <h4>Example: None Type</h4>
+                    <pre><code># Variable with no value assigned yet
+result = None
+
+print(result)  # Output: None
+print(type(result))  # Output: <class 'NoneType'>
+
+# Checking if a variable is None
+if result is None:
+    print("No result yet")  # This will be printed</code></pre>
+                </div>
+                
+                <h4>Checking Data Types</h4>
+                <p>You can check the data type of any variable using the <code>type()</code> function:</p>
+                
+                <div class="example">
+                    <h4>Example: Checking Types</h4>
+                    <pre><code>a = 42
+b = 3.14
+c = "Hello"
+d = True
+
+print(type(a))  # Output: <class 'int'>
+print(type(b))  # Output: <class 'float'>
+print(type(c))  # Output: <class 'str'>
+print(type(d))  # Output: <class 'bool'></code></pre>
+                </div>
+            </section>
+            
+            <section id="type-casting">
+                <h3>Type Casting</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Type Casting</h4>
+                    <p>Type casting (or type conversion) is the process of converting a value from one data type to another. This is important when you want to use a value in a context that requires a specific data type.</p>
+                </div>
+                
+                <p>Python provides built-in functions for type conversion:</p>
+                <ul>
+                    <li><code>int()</code>: Converts to integer</li>
+                    <li><code>float()</code>: Converts to float</li>
+                    <li><code>str()</code>: Converts to string</li>
+                    <li><code>bool()</code>: Converts to boolean</li>
+                </ul>
+                
+                <h4>Converting Between Numeric Types</h4>
+                
+                <div class="example">
+                    <h4>Example: Numeric Type Conversion</h4>
+                    <pre><code># Float to int (truncates the decimal part)
+x = 3.75
+x_int = int(x)
+print(x_int)  # Output: 3
+
+# Int to float
+y = 5
+y_float = float(y)
+print(y_float)  # Output: 5.0</code></pre>
+                </div>
+                
+                <h4>Converting to and from Strings</h4>
+                
+                <div class="example">
+                    <h4>Example: String Conversion</h4>
+                    <pre><code># Number to string
+age = 25
+age_str = str(age)
+print("You are " + age_str + " years old")  # Output: You are 25 years old
+
+# String to number (if the string contains a valid number)
+num_str = "42"
+num = int(num_str)
+print(num + 8)  # Output: 50
+
+# String to float
+pi_str = "3.14159"
+pi = float(pi_str)
+print(pi * 2)  # Output: 6.28318</code></pre>
+                </div>
+                
+                <div class="warning">
+                    <h4>Type Conversion Errors</h4>
+                    <p>Not all type conversions are possible. For example, trying to convert a non-numeric string to a number will result in an error:</p>
+                    <pre><code># This will cause an error
+# int("hello")</code></pre>
+                    <p>Always make sure the value can be validly converted to the target type.</p>
+                </div>
+                
+                <h4>Converting to Boolean</h4>
+                <p>When converting to boolean, most values convert to <code>True</code> except for "empty" values like:</p>
+                <ul>
+                    <li>0 (integer)</li>
+                    <li>0.0 (float)</li>
+                    <li>"" (empty string)</li>
+                    <li>[] (empty list)</li>
+                    <li>{} (empty dictionary)</li>
+                    <li>None</li>
+                </ul>
+                
+                <div class="example">
+                    <h4>Example: Boolean Conversion</h4>
+                    <pre><code>print(bool(0))  # Output: False
+print(bool(1))  # Output: True
+print(bool(-5))  # Output: True
+print(bool(""))  # Output: False
+print(bool("Hello"))  # Output: True
+print(bool(None))  # Output: False</code></pre>
+                </div>
+                
+                <h4>Practical Use of Type Casting with Input</h4>
+                <p>The <code>input()</code> function always returns a string, regardless of what the user types. If you need a number, you must convert the input:</p>
+                
+                <div class="example">
+                    <h4>Example: Converting User Input</h4>
+                    <pre><code># Without type casting
+user_input = input("Enter a number: ")
+result = user_input * 2
+print(result)  # If user enters "5", output will be "55" (string duplication)
+
+# With type casting
+user_input = input("Enter a number: ")
+num = float(user_input)  # or int(user_input) for whole numbers
+result = num * 2
+print(result)  # If user enters "5", output will be 10.0</code></pre>
+                </div>
+            </section>
+            
+            <section id="chapter3-exercises">
+                <h3>Exercises</h3>
+                
+                <div class="exercise">
+                    <h4>Exercise 3.1: Basic Input/Output</h4>
+                    <p>Write a program that:</p>
+                    <ol>
+                        <li>Asks for the user's name</li>
+                        <li>Asks for the user's age</li>
+                        <li>Greets the user and tells them how old they will be in 10 years</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 3.2: Temperature Converter</h4>
+                    <p>Create a program that converts temperatures between Celsius and Fahrenheit:</p>
+                    <ol>
+                        <li>Ask the user to enter a temperature</li>
+                        <li>Ask the user to specify if it's in Celsius (C) or Fahrenheit (F)</li>
+                        <li>Convert the temperature to the other unit and display the result</li>
+                    </ol>
+                    <p>Use these formulas:</p>
+                    <ul>
+                        <li>F = (C * 9/5) + 32</li>
+                        <li>C = (F - 32) * 5/9</li>
+                    </ul>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 3.3: String Manipulation</h4>
+                    <p>Write a program that:</p>
+                    <ol>
+                        <li>Asks the user to enter a sentence</li>
+                        <li>Prints the sentence in all uppercase letters</li>
+                        <li>Prints the sentence in all lowercase letters</li>
+                        <li>Prints the number of characters in the sentence</li>
+                        <li>Prints the first and last character of the sentence</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 3.4: Type Conversion Practice</h4>
+                    <p>Write a program that:</p>
+                    <ol>
+                        <li>Creates variables of different types: integer, float, string, and boolean</li>
+                        <li>Converts each variable to all other types where possible</li>
+                        <li>Prints the original value, the new type, and the converted value</li>
+                        <li>Explains which conversions might cause data loss or errors</li>
+                    </ol>
+                </div>
+            </section>
+            
+            <section id="chapter3-mcq">
+                <h3>Knowledge Check</h3>
+                
+                <div class="mcq-container">
+                    <h4>Question 1: What does the input() function return in Python?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) Integer</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) Float</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">C) String</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) Boolean</div>
+                    <div id="feedback11" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 2: What will be the output of the following code?</h4>
+                    <pre><code>print("Hello" + 5)</code></pre>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) Hello5</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) Hello 5</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) 5Hello</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">D) Error</div>
+                    <div id="feedback12" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 3: What is the correct way to convert the string "123" to an integer in Python?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">A) int("123")</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) integer("123")</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) "123".toInt()</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) convert("123", int)</div>
+                    <div id="feedback13" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 4: What will bool("") evaluate to?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">A) False</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) True</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) None</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) Error</div>
+                    <div id="feedback14" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 5: What will be the output of the following code?</h4>
+                    <pre><code>print("Python " * 3)</code></pre>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) Python 3</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) PythonPythonPython</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">C) Python Python Python </div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) Error</div>
+                    <div id="feedback15" class="hidden"></div>
+                </div>
+            </section>
+        </section>
+        
+        <section id="chapter4">
+            <h2>Chapter 4: Loops</h2>
+            <p>Loops are an essential concept in programming, allowing you to repeat actions multiple times without writing the same code over and over. In this chapter, we'll explore the two main types of loops in Python: for loops and while loops.</p>
+            
+            <section id="for-loops">
+                <h3>For Loops</h3>
+                
+                <div class="definition">
+                    <h4>Definition: For Loop</h4>
+                    <p>A for loop is used to iterate over a sequence (such as a list, string, or range) and execute a block of code for each item in the sequence. It's ideal when you know in advance how many times you want to execute the loop.</p>
+                </div>
+                
+                <h4>Basic For Loop Syntax</h4>
+                <p>The basic syntax of a for loop in Python is:</p>
+                
+                <pre><code>for variable in sequence:
+    # Code to execute for each item in the sequence</code></pre>
+                
+                <p>The most common way to use for loops is with the range() function, which generates a sequence of numbers.</p>
+                
+                <div class="example">
+                    <h4>Example: Basic For Loop with range()</h4>
+                    <pre><code># Print numbers from 0 to 4
+for i in range(5):
+    print(i)
+    
+# Output:
+# 0
+# 1
+# 2
+# 3
+# 4</code></pre>
+                </div>
+                
+                <h4>Understanding the range() Function</h4>
+                <p>The range() function can take 1, 2, or 3 arguments:</p>
+                <ul>
+                    <li><code>range(stop)</code>: Generates numbers from 0 to stop-1</li>
+                    <li><code>range(start, stop)</code>: Generates numbers from start to stop-1</li>
+                    <li><code>range(start, stop, step)</code>: Generates numbers from start to stop-1, incrementing by step</li>
+                </ul>
+                
+                <div class="example">
+                    <h4>Example: Different Ways to Use range()</h4>
+                    <pre><code># range with one argument: range(stop)
+for i in range(3):
+    print(i)
+# Output: 0, 1, 2
+
+# range with two arguments: range(start, stop)
+for i in range(2, 5):
+    print(i)
+# Output: 2, 3, 4
+
+# range with three arguments: range(start, stop, step)
+for i in range(1, 10, 2):
+    print(i)
+# Output: 1, 3, 5, 7, 9
+
+# Counting down with negative step
+for i in range(10, 0, -1):
+    print(i)
+# Output: 10, 9, 8, 7, 6, 5, 4, 3, 2, 1</code></pre>
+                </div>
+                
+                <h4>Looping Through Sequences</h4>
+                <p>You can also use for loops to iterate through strings and other sequences:</p>
+                
+                <div class="example">
+                    <h4>Example: Looping Through a String</h4>
+                    <pre><code>word = "Python"
+for letter in word:
+    print(letter)
+    
+# Output:
+# P
+# y
+# t
+# h
+# o
+# n</code></pre>
+                </div>
+                
+                <h4>Using Indexes and Enumeration</h4>
+                <p>Sometimes you need both the item and its position (index) in the sequence:</p>
+                
+                <div class="example">
+                    <h4>Example: Using enumerate()</h4>
+                    <pre><code>fruits = ["apple", "banana", "cherry"]
+
+# Using enumerate to get index and value
+for index, fruit in enumerate(fruits):
+    print(f"Index {index}: {fruit}")
+    
+# Output:
+# Index 0: apple
+# Index 1: banana
+# Index 2: cherry</code></pre>
+                </div>
+            </section>
+            
+            <section id="while-loops">
+                <h3>While Loops</h3>
+                
+                <div class="definition">
+                    <h4>Definition: While Loop</h4>
+                    <p>A while loop repeats a block of code as long as a specified condition remains True. Unlike for loops, which iterate over a sequence, while loops continue until a condition changes.</p>
+                </div>
+                
+                <h4>Basic While Loop Syntax</h4>
+                <p>The basic syntax of a while loop in Python is:</p>
+                
+                <pre><code>while condition:
+    # Code to execute while the condition is True</code></pre>
+                
+                <div class="example">
+                    <h4>Example: Basic While Loop</h4>
+                    <pre><code># Print numbers from 0 to 4
+count = 0
+while count < 5:
+    print(count)
+    count += 1  # Increment count by 1
+    
+# Output:
+# 0
+# 1
+# 2
+# 3
+# 4</code></pre>
+                </div>
+                
+                <div class="warning">
+                    <h4>Caution: Infinite Loops</h4>
+                    <p>If the condition in a while loop never becomes False, the loop will run forever, creating what's called an "infinite loop". Always make sure your while loop has a way to make the condition False eventually.</p>
+                    <pre><code># This is an infinite loop - DON'T run this!
+# while True:
+#     print("This will never end!")</code></pre>
+                </div>
+                
+                <h4>Using While Loops for User Input Validation</h4>
+                <p>While loops are particularly useful for validating user input:</p>
+                
+                <div class="example">
+                    <h4>Example: Input Validation</h4>
+                    <pre><code># Keep asking for a positive number until the user provides one
+valid_input = False
+while not valid_input:
+    user_input = input("Please enter a positive number: ")
+    if user_input.isdigit() and int(user_input) > 0:
+        valid_input = True
+        num = int(user_input)
+        print(f"Thank you! You entered {num}")
+    else:
+        print("That was not a positive number. Please try again.")</code></pre>
+                </div>
+                
+                <h4>While Loop with Counter</h4>
+                <p>While loops are often used with counters to control the number of iterations:</p>
+                
+                <div class="example">
+                    <h4>Example: While Loop with Counter</h4>
+                    <pre><code># Double a number 5 times
+number = 2
+count = 0
+
+while count < 5:
+    number = number * 2
+    count += 1
+    print(f"After doubling {count} time(s), the number is {number}")
+    
+# Output:
+# After doubling 1 time(s), the number is 4
+# After doubling 2 time(s), the number is 8
+# After doubling 3 time(s), the number is 16
+# After doubling 4 time(s), the number is 32
+# After doubling 5 time(s), the number is 64</code></pre>
+                </div>
+            </section>
+            
+            <section id="break-statement">
+                <h3>The Break Statement</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Break Statement</h4>
+                    <p>The break statement is used to exit a loop prematurely, regardless of whether the loop condition is still True. It's useful when you want to end the loop based on a specific condition inside the loop body.</p>
+                </div>
+                
+                <h4>Using break in For Loops</h4>
+                
+                <div class="example">
+                    <h4>Example: break in a For Loop</h4>
+                    <pre><code># Find the first number divisible by 7 between 1 and 100
+for num in range(1, 101):
+    if num % 7 == 0:
+        print(f"The first number divisible by 7 is {num}")
+        break  # Exit the loop once we find it
+        
+# Output: The first number divisible by 7 is 7</code></pre>
+                </div>
+                
+                <h4>Using break in While Loops</h4>
+                
+                <div class="example">
+                    <h4>Example: break in a While Loop</h4>
+                    <pre><code># Allow the user to enter numbers until they enter 'quit'
+while True:
+    user_input = input("Enter a number (or 'quit' to exit): ")
+    
+    if user_input.lower() == 'quit':
+        print("Exiting the program...")
+        break
+    
+    # Try to convert input to a number
+    try:
+        num = float(user_input)
+        print(f"You entered: {num}")
+    except:
+        print("That's not a valid number. Try again.")</code></pre>
+                </div>
+                
+                <h4>The continue Statement</h4>
+                <p>In addition to <code>break</code>, Python also provides the <code>continue</code> statement which skips the current iteration and moves to the next one:</p>
+                
+                <div class="example">
+                    <h4>Example: Using continue</h4>
+                    <pre><code># Print only odd numbers from 1 to 10
+for num in range(1, 11):
+    if num % 2 == 0:  # If the number is even
+        continue  # Skip the rest of this iteration
+    print(num)
+    
+# Output:
+# 1
+# 3
+# 5
+# 7
+# 9</code></pre>
+                </div>
+                
+                <h4>The else Clause in Loops</h4>
+                <p>Both <code>for</code> and <code>while</code> loops can have an optional <code>else</code> clause that executes when the loop condition becomes False (but not when the loop is terminated by a <code>break</code> statement):</p>
+                
+                <div class="example">
+                    <h4>Example: Loop with else Clause</h4>
+                    <pre><code># Check if any number from 2 to 9 is divisible by 13
+for num in range(2, 10):
+    if num % 13 == 0:
+        print(f"{num} is divisible by 13")
+        break
+else:
+    print("No number between 2 and 9 is divisible by 13")
+    
+# Output: No number between 2 and 9 is divisible by 13</code></pre>
+                </div>
+            </section>
+            
+            <section id="chapter4-exercises">
+                <h3>Exercises</h3>
+                
+                <div class="exercise">
+                    <h4>Exercise 4.1: For Loop Basics</h4>
+                    <p>Write a program that:</p>
+                    <ol>
+                        <li>Prints all numbers from 1 to 20</li>
+                        <li>Prints all even numbers from 1 to 20</li>
+                        <li>Prints all numbers from 20 to 1 (counting down)</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 4.2: Sum and Average</h4>
+                    <p>Write a program that:</p>
+                    <ol>
+                        <li>Asks the user how many numbers they want to enter</li>
+                        <li>Uses a for loop to collect that many numbers from the user</li>
+                        <li>Calculates and prints the sum and average of those numbers</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 4.3: Factorial Calculator</h4>
+                    <p>Write a program that calculates the factorial of a number entered by the user. The factorial of n (written as n!) is the product of all positive integers less than or equal to n.</p>
+                    <p>For example, 5! = 5 × 4 × 3 × 2 × 1 = 120</p>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 4.4: Password Validation</h4>
+                    <p>Write a program that asks the user to create a password. The password must:</p>
+                    <ul>
+                        <li>Be at least 8 characters long</li>
+                        <li>Contain at least one uppercase letter</li>
+                        <li>Contain at least one digit</li>
+                    </ul>
+                    <p>Use a while loop to keep asking until the user enters a valid password. Once valid, print a message confirming the password has been set.</p>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 4.5: Prime Number Checker</h4>
+                    <p>Write a program that asks the user for a number and then determines if it's a prime number (only divisible by 1 and itself). Use a for loop and the break statement to optimize your code.</p>
+                </div>
+            </section>
+            
+            <section id="chapter4-mcq">
+                <h3>Knowledge Check</h3>
+                
+                <div class="mcq-container">
+                    <h4>Question 1: What will be the output of the following code?</h4>
+                    <pre><code>for i in range(1, 10, 2):
+    print(i, end=" ")</code></pre>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) 1 2 3 4 5 6 7 8 9</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">B) 1 3 5 7 9</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) 2 4 6 8</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) 1 2 3 4 5 6 7 8 9 10</div>
+                    <div id="feedback16" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 2: What happens if you forget to update the controlling variable in a while loop?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">A) The loop will likely run infinitely</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) Python will automatically stop the loop after 1000 iterations</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) The loop will run exactly once</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) A syntax error will occur</div>
+                    <div id="feedback17" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 3: What does the break statement do in a loop?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) Skips the current iteration and moves to the next one</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">B) Exits the loop immediately</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) Causes an error in the program</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) Pauses the loop until the user presses a key</div>
+                    <div id="feedback18" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 4: Which of the following is NOT a valid way to iterate through a string in Python?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) for char in string:</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) for i in range(len(string)): char = string[i]</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">C) foreach(char in string)</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) for index, char in enumerate(string):</div>
+                    <div id="feedback19" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 5: What will the following code print?</h4>
+                    <pre><code>count = 0
+while count < 5:
+    count += 1
+    if count == 3:
+        continue
+    print(count)</code></pre>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) 1 2 3 4 5</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) 1 2 4 5 6</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">C) 1 2 4 5</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) 0 1 2 4 5</div>
+                    <div id="feedback20" class="hidden"></div>
+                </div>
+            </section>
+        </section>
+        
+        <section id="chapter5">
+            <h2>Chapter 5: Advanced Data Structures</h2>
+            <p>In previous chapters, we learned about basic data types like integers, floats, strings, and booleans. Now, we'll explore more complex data structures that allow us to organize and group these simple data types in meaningful ways. Python provides several built-in data structures: lists, dictionaries, sets, and tuples.</p>
+            
+            <section id="lists">
+                <h3>Lists</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Lists</h4>
+                    <p>A list is an ordered, mutable (changeable) collection of items. Lists can contain items of different data types, including other lists. Items in a list are indexed starting from 0.</p>
+                </div>
+                
+                <h4>Creating Lists</h4>
+                
+                <div class="example">
+                    <h4>Example: Creating Lists</h4>
+                    <pre><code># Empty list
+empty_list = []
+
+# List of numbers
+numbers = [1, 2, 3, 4, 5]
+
+# List of mixed data types
+mixed = [1, "Hello", 3.14, True]
+
+# Nested lists
+nested = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]</code></pre>
+                </div>
+                
+                <h4>Accessing List Items</h4>
+                
+                <div class="example">
+                    <h4>Example: Accessing List Items</h4>
+                    <pre><code>fruits = ["apple", "banana", "cherry", "date", "elderberry"]
+
+# Accessing by index (remember, indices start at 0)
+print(fruits[0])  # Output: apple
+print(fruits[2])  # Output: cherry
+
+# Negative indexing (counts from the end)
+print(fruits[-1])  # Output: elderberry (last item)
+print(fruits[-2])  # Output: date (second to last item)
+
+# Slicing to get a sublist
+print(fruits[1:3])  # Output: ['banana', 'cherry'] (from index 1 to 3-1)
+print(fruits[:3])   # Output: ['apple', 'banana', 'cherry'] (from start to 3-1)
+print(fruits[2:])   # Output: ['cherry', 'date', 'elderberry'] (from index 2 to end)</code></pre>
+                </div>
+                
+                <h4>Modifying Lists</h4>
+                <p>Lists are mutable, which means you can change their content after creation.</p>
+                
+                <div class="example">
+                    <h4>Example: Modifying Lists</h4>
+                    <pre><code>fruits = ["apple", "banana", "cherry"]
+
+# Changing an item
+fruits[1] = "blueberry"
+print(fruits)  # Output: ['apple', 'blueberry', 'cherry']
+
+# Adding items with append() - adds to the end
+fruits.append("date")
+print(fruits)  # Output: ['apple', 'blueberry', 'cherry', 'date']
+
+# Adding items with insert() - adds at a specific position
+fruits.insert(1, "apricot")
+print(fruits)  # Output: ['apple', 'apricot', 'blueberry', 'cherry', 'date']
+
+# Removing items with remove() - removes the first matching value
+fruits.remove("cherry")
+print(fruits)  # Output: ['apple', 'apricot', 'blueberry', 'date']
+
+# Removing items with pop() - removes by index and returns the value
+fruit = fruits.pop(1)  # Removes and returns the item at index 1
+print(fruit)  # Output: apricot
+print(fruits)  # Output: ['apple', 'blueberry', 'date']
+
+# Clearing a list
+fruits.clear()
+print(fruits)  # Output: []</code></pre>
+                </div>
+                
+                <h4>List Operations and Methods</h4>
+                
+                <div class="example">
+                    <h4>Example: List Operations and Methods</h4>
+                    <pre><code>fruits = ["apple", "banana", "cherry"]
+more_fruits = ["date", "elderberry"]
+
+# Concatenating lists
+all_fruits = fruits + more_fruits
+print(all_fruits)  # Output: ['apple', 'banana', 'cherry', 'date', 'elderberry']
+
+# Extending a list with another list
+fruits.extend(more_fruits)
+print(fruits)  # Output: ['apple', 'banana', 'cherry', 'date', 'elderberry']
+
+# Checking if an item exists in a list
+print("banana" in fruits)  # Output: True
+print("kiwi" in fruits)    # Output: False
+
+# Finding the index of an item
+print(fruits.index("cherry"))  # Output: 2
+
+# Counting occurrences of an item
+print(fruits.count("apple"))   # Output: 1
+
+# Sorting a list
+numbers = [3, 1, 4, 1, 5, 9, 2]
+numbers.sort()
+print(numbers)  # Output: [1, 1, 2, 3, 4, 5, 9]
+
+# Reversing a list
+numbers.reverse()
+print(numbers)  # Output: [9, 5, 4, 3, 2, 1, 1]
+
+# Getting the length of a list
+print(len(fruits))  # Output: 5</code></pre>
+                </div>
+                
+                <h4>Iterating Through Lists</h4>
+                
+                <div class="example">
+                    <h4>Example: Iterating Through Lists</h4>
+                    <pre><code>fruits = ["apple", "banana", "cherry", "date"]
+
+# Using a for loop
+print("Fruits:")
+for fruit in fruits:
+    print(f"- {fruit}")
+
+# Using a for loop with index
+print("\nFruits with index:")
+for index, fruit in enumerate(fruits):
+    print(f"{index}: {fruit}")
+
+# Using a while loop
+print("\nFruits (while loop):")
+i = 0
+while i < len(fruits):
+    print(f"- {fruits[i]}")
+    i += 1</code></pre>
+                </div>
+                
+                <div class="note">
+                    <h4>List Comprehensions</h4>
+                    <p>Python offers a concise way to create lists based on existing lists called list comprehensions.</p>
+                    <pre><code># Create a list of squares for numbers 1-5
+squares = [x**2 for x in range(1, 6)]
+print(squares)  # Output: [1, 4, 9, 16, 25]
+
+# Create a list of only even numbers from 1-10
+even_numbers = [x for x in range(1, 11) if x % 2 == 0]
+print(even_numbers)  # Output: [2, 4, 6, 8, 10]</code></pre>
+                </div>
+            </section>
+            
+            <section id="dictionaries">
+                <h3>Dictionaries</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Dictionaries</h4>
+                    <p>A dictionary is an unordered, mutable collection of key-value pairs. Each key must be unique and immutable (typically strings, numbers, or tuples). Dictionaries are optimized for retrieving values when the key is known.</p>
+                </div>
+                
+                <h4>Creating Dictionaries</h4>
+                
+                <div class="example">
+                    <h4>Example: Creating Dictionaries</h4>
+                    <pre><code># Empty dictionary
+empty_dict = {}
+
+# Dictionary with string keys
+person = {
+    "name": "Alice",
+    "age": 30,
+    "city": "New York"
+}
+
+# Dictionary with number keys
+scores = {
+    1: "Gold",
+    2: "Silver",
+    3: "Bronze"
+}
+
+# Dictionary with mixed value types
+mixed = {
+    "name": "Bob",
+    "age": 25,
+    "is_student": True,
+    "courses": ["Math", "Physics", "Computer Science"]
+}</code></pre>
+                </div>
+                
+                <h4>Accessing Dictionary Items</h4>
+                
+                <div class="example">
+                    <h4>Example: Accessing Dictionary Items</h4>
+                    <pre><code>person = {
+    "name": "Alice",
+    "age": 30,
+    "city": "New York"
+}
+
+# Accessing by key
+print(person["name"])  # Output: Alice
+print(person["age"])   # Output: 30
+
+# Using the get() method (safer as it doesn't raise an error if key doesn't exist)
+print(person.get("city"))       # Output: New York
+print(person.get("country"))    # Output: None (key doesn't exist)
+print(person.get("country", "Unknown"))  # Output: Unknown (default value)</code></pre>
+                </div>
+                
+                <h4>Modifying Dictionaries</h4>
+                
+                <div class="example">
+                    <h4>Example: Modifying Dictionaries</h4>
+                    <pre><code>person = {
+    "name": "Alice",
+    "age": 30,
+    "city": "New York"
+}
+
+# Adding or updating a key-value pair
+person["email"] = "alice@example.com"  # Add new key-value
+person["age"] = 31                     # Update existing key
+print(person)  # Output: {'name': 'Alice', 'age': 31, 'city': 'New York', 'email': 'alice@example.com'}
+
+# Adding multiple key-value pairs at once
+person.update({"phone": "555-1234", "occupation": "Engineer"})
+print(person)
+
+# Removing a key-value pair with pop() - returns the value
+email = person.pop("email")
+print(email)  # Output: alice@example.com
+print(person)  # Dictionary no longer has 'email' key
+
+# Removing a key-value pair with del
+del person["phone"]
+print(person)  # Dictionary no longer has 'phone' key
+
+# Clearing a dictionary
+person.clear()
+print(person)  # Output: {}</code></pre>
+                </div>
+                
+                <h4>Dictionary Methods</h4>
+                
+                <div class="example">
+                    <h4>Example: Dictionary Methods</h4>
+                    <pre><code>person = {
+    "name": "Alice",
+    "age": 30,
+    "city": "New York"
+}
+
+# Getting all keys
+keys = person.keys()
+print(list(keys))  # Output: ['name', 'age', 'city']
+
+# Getting all values
+values = person.values()
+print(list(values))  # Output: ['Alice', 30, 'New York']
+
+# Getting all key-value pairs as tuples
+items = person.items()
+print(list(items))  # Output: [('name', 'Alice'), ('age', 30), ('city', 'New York')]
+
+# Checking if a key exists
+print("name" in person)  # Output: True
+print("email" in person)  # Output: False
+
+# Getting the number of key-value pairs
+print(len(person))  # Output: 3</code></pre>
+                </div>
+                
+                <h4>Iterating Through Dictionaries</h4>
+                
+                <div class="example">
+                    <h4>Example: Iterating Through Dictionaries</h4>
+                    <pre><code>person = {
+    "name": "Alice",
+    "age": 30,
+    "city": "New York"
+}
+
+# Iterating through keys (default)
+print("Keys:")
+for key in person:
+    print(key)
+
+# Iterating through keys explicitly
+print("\nKeys (explicit):")
+for key in person.keys():
+    print(key)
+
+# Iterating through values
+print("\nValues:")
+for value in person.values():
+    print(value)
+
+# Iterating through key-value pairs
+print("\nKey-Value Pairs:")
+for key, value in person.items():
+    print(f"{key}: {value}")</code></pre>
+                </div>
+                
+                <h4>Nested Dictionaries</h4>
+                
+                <div class="example">
+                    <h4>Example: Nested Dictionaries</h4>
+                    <pre><code>students = {
+    "Alice": {
+        "age": 22,
+        "major": "Computer Science",
+        "grades": {"Math": 90, "Programming": 95, "Physics": 85}
+    },
+    "Bob": {
+        "age": 20,
+        "major": "Engineering",
+        "grades": {"Math": 85, "Programming": 80, "Physics": 90}
+    }
+}
+
+# Accessing nested values
+alice_age = students["Alice"]["age"]
+print(f"Alice's age: {alice_age}")  # Output: Alice's age: 22
+
+bob_physics_grade = students["Bob"]["grades"]["Physics"]
+print(f"Bob's Physics grade: {bob_physics_grade}")  # Output: Bob's Physics grade: 90
+
+# Modifying nested values
+students["Alice"]["grades"]["Math"] = 92
+print(students["Alice"]["grades"])  # Output: {'Math': 92, 'Programming': 95, 'Physics': 85}</code></pre>
+                </div>
+            </section>
+            
+            <section id="sets">
+                <h3>Sets</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Sets</h4>
+                    <p>A set is an unordered collection of unique items. Sets are useful for membership testing and eliminating duplicate entries. Sets are mutable, but can only contain immutable items (like strings, numbers, or tuples, but not lists or dictionaries).</p>
+                </div>
+                
+                <h4>Creating Sets</h4>
+                
+                <div class="example">
+                    <h4>Example: Creating Sets</h4>
+                    <pre><code># Empty set (must use set() constructor, {} creates an empty dict)
+empty_set = set()
+
+# Set with values
+fruits = {"apple", "banana", "cherry"}
+
+# Creating a set from a list (removes duplicates)
+numbers = set([1, 2, 2, 3, 4, 4, 5])
+print(numbers)  # Output: {1, 2, 3, 4, 5} (order may vary)</code></pre>
+                </div>
+                
+                <h4>Set Operations</h4>
+                
+                <div class="example">
+                    <h4>Example: Set Operations</h4>
+                    <pre><code>fruits = {"apple", "banana", "cherry"}
+
+# Adding items
+fruits.add("date")
+print(fruits)  # Output: {'apple', 'banana', 'cherry', 'date'} (order may vary)
+
+# Adding multiple items
+fruits.update(["elderberry", "fig"])
+print(fruits)
+
+# Removing items
+fruits.remove("banana")  # raises an error if the item doesn't exist
+print(fruits)
+
+# Safer removal with discard() (doesn't raise an error if item doesn't exist)
+fruits.discard("grape")  # No error even though "grape" isn't in the set
+print(fruits)
+
+# Removing and returning an arbitrary item
+fruit = fruits.pop()
+print(f"Popped: {fruit}")
+print(fruits)
+
+# Checking membership
+print("cherry" in fruits)  # Output: True or False depending on earlier pop() result
+print("banana" in fruits)  # Output: False</code></pre>
+                </div>
+                
+                <h4>Set Mathematical Operations</h4>
+                <p>Sets support mathematical operations like union, intersection, difference, and symmetric difference.</p>
+                
+                <div class="example">
+                    <h4>Example: Set Mathematical Operations</h4>
+                    <pre><code>set1 = {1, 2, 3, 4, 5}
+set2 = {4, 5, 6, 7, 8}
+
+# Union (all elements from both sets)
+union = set1 | set2  # or set1.union(set2)
+print(union)  # Output: {1, 2, 3, 4, 5, 6, 7, 8}
+
+# Intersection (elements that are in both sets)
+intersection = set1 & set2  # or set1.intersection(set2)
+print(intersection)  # Output: {4, 5}
+
+# Difference (elements in set1 but not in set2)
+difference = set1 - set2  # or set1.difference(set2)
+print(difference)  # Output: {1, 2, 3}
+
+# Symmetric difference (elements in either set, but not in both)
+sym_diff = set1 ^ set2  # or set1.symmetric_difference(set2)
+print(sym_diff)  # Output: {1, 2, 3, 6, 7, 8}</code></pre>
+                </div>
+                
+                <h4>Iterating Through Sets</h4>
+                
+                <div class="example">
+                    <h4>Example: Iterating Through Sets</h4>
+                    <pre><code>fruits = {"apple", "banana", "cherry", "date"}
+
+print("Fruits in the set:")
+for fruit in fruits:
+    print(f"- {fruit}")</code></pre>
+                    <p>Note: Since sets are unordered, the items may be printed in any order.</p>
+                </div>
+                
+                <h4>Set Comprehensions</h4>
+                <p>Similar to list comprehensions, Python also supports set comprehensions:</p>
+                
+                <div class="example">
+                    <h4>Example: Set Comprehensions</h4>
+                    <pre><code># Create a set of squares for numbers 1-5
+squares = {x**2 for x in range(1, 6)}
+print(squares)  # Output: {1, 4, 9, 16, 25} (order may vary)
+
+# Create a set of even numbers from 1-10
+even_numbers = {x for x in range(1, 11) if x % 2 == 0}
+print(even_numbers)  # Output: {2, 4, 6, 8, 10} (order may vary)</code></pre>
+                </div>
+            </section>
+            
+            <section id="tuples">
+                <h3>Tuples</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Tuples</h4>
+                    <p>A tuple is an ordered, immutable (unchangeable) collection of items. Like lists, tuples can contain items of different data types, including other tuples. Once created, you cannot change, add, or remove items.</p>
+                </div>
+                
+                <h4>Creating Tuples</h4>
+                
+                <div class="example">
+                    <h4>Example: Creating Tuples</h4>
+                    <pre><code># Empty tuple
+empty_tuple = ()
+
+# Tuple with a single item (note the comma)
+singleton = (1,)
+
+# Tuple with multiple items
+numbers = (1, 2, 3, 4, 5)
+
+# Tuple without parentheses (parentheses are optional in many cases)
+fruits = "apple", "banana", "cherry"
+
+# Tuple with mixed data types
+mixed = (1, "Hello", 3.14, True)
+
+# Nested tuples
+nested = ((1, 2), (3, 4), (5, 6))
+
+# Creating a tuple from a list
+tuple_from_list = tuple([1, 2, 3])
+print(tuple_from_list)  # Output: (1, 2, 3)</code></pre>
+                </div>
+                
+                <h4>Accessing Tuple Items</h4>
+                
+                <div class="example">
+                    <h4>Example: Accessing Tuple Items</h4>
+                    <pre><code>fruits = ("apple", "banana", "cherry", "date", "elderberry")
+
+# Accessing by index
+print(fruits[0])  # Output: apple
+print(fruits[2])  # Output: cherry
+
+# Negative indexing
+print(fruits[-1])  # Output: elderberry (last item)
+print(fruits[-2])  # Output: date (second to last item)
+
+# Slicing
+print(fruits[1:3])  # Output: ('banana', 'cherry')
+print(fruits[:3])   # Output: ('apple', 'banana', 'cherry')
+print(fruits[2:])   # Output: ('cherry', 'date', 'elderberry')</code></pre>
+                </div>
+                
+                <h4>Tuple Operations</h4>
+                
+                <div class="example">
+                    <h4>Example: Tuple Operations</h4>
+                    <pre><code>tuple1 = (1, 2, 3)
+tuple2 = (4, 5, 6)
+
+# Concatenation
+combined = tuple1 + tuple2
+print(combined)  # Output: (1, 2, 3, 4, 5, 6)
+
+# Repetition
+repeated = tuple1 * 3
+print(repeated)  # Output: (1, 2, 3, 1, 2, 3, 1, 2, 3)
+
+# Length
+print(len(tuple1))  # Output: 3
+
+# Membership test
+print(2 in tuple1)  # Output: True
+print(5 in tuple1)  # Output: False
+
+# Min and max
+print(min(tuple1))  # Output: 1
+print(max(tuple1))  # Output: 3
+
+# Count occurrences of a value
+numbers = (1, 2, 2, 3, 3, 3, 4)
+print(numbers.count(3))  # Output: 3
+
+# Find index of a value (first occurrence)
+print(numbers.index(3))  # Output: 3</code></pre>
+                </div>
+                
+                <h4>Immutability of Tuples</h4>
+                <p>Unlike lists, tuples cannot be changed after creation:</p>
+                
+                <div class="example">
+                    <h4>Example: Immutability of Tuples</h4>
+                    <pre><code>fruits = ("apple", "banana", "cherry")
+
+# The following would cause an error:
+# fruits[0] = "apricot"  # TypeError: 'tuple' object does not support item assignment
+
+# But you can create a new tuple based on the old one
+fruits = ("apricot",) + fruits[1:]
+print(fruits)  # Output: ('apricot', 'banana', 'cherry')</code></pre>
+                </div>
+                
+                <h4>Iterating Through Tuples</h4>
+                
+                <div class="example">
+                    <h4>Example: Iterating Through Tuples</h4>
+                    <pre><code>fruits = ("apple", "banana", "cherry", "date")
+
+# Using a for loop
+print("Fruits:")
+for fruit in fruits:
+    print(f"- {fruit}")
+
+# Using a for loop with index
+print("\nFruits with index:")
+for index, fruit in enumerate(fruits):
+    print(f"{index}: {fruit}")</code></pre>
+                </div>
+                
+                <h4>When to Use Tuples vs Lists</h4>
+                <ul>
+                    <li><strong>Use tuples</strong> when the collection of items should not change (e.g., coordinates, RGB color values, database records)</li>
+                    <li><strong>Use lists</strong> when the collection needs to be modified (e.g., a shopping cart, user inputs, items to process)</li>
+                </ul>
+                
+                <div class="example">
+                    <h4>Example: Practical Tuple Usage</h4>
+                    <pre><code># Returning multiple values from a function
+def get_dimensions():
+    return (1920, 1080)  # width, height
+
+screen_size = get_dimensions()
+width, height = screen_size  # Unpacking the tuple
+print(f"Width: {width}, Height: {height}")
+
+# Or more directly:
+width, height = get_dimensions()
+print(f"Width: {width}, Height: {height}")
+
+# Using tuples as dictionary keys (lists cannot be used as keys)
+locations = {
+    (40.7128, -74.0060): "New York",
+    (34.0522, -118.2437): "Los Angeles",
+    (41.8781, -87.6298): "Chicago"
+}
+
+# Finding a location by coordinates
+coords = (40.7128, -74.0060)
+print(f"The coordinates {coords} are for {locations[coords]}")</code></pre>
+                </div>
+            </section>
+            
+            <section id="chapter5-exercises">
+                <h3>Exercises</h3>
+                
+                <div class="exercise">
+                    <h4>Exercise 5.1: List Manipulation</h4>
+                    <p>Write a program that:</p>
+                    <ol>
+                        <li>Creates a list of your favorite fruits</li>
+                        <li>Adds two more fruits to the end of the list</li>
+                        <li>Removes the second fruit from the list</li>
+                        <li>Sorts the list alphabetically</li>
+                        <li>Prints the list before and after each operation</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 5.2: Dictionary of Students</h4>
+                    <p>Create a program that:</p>
+                    <ol>
+                        <li>Creates a dictionary with the names of three students as keys, and their ages as values</li>
+                        <li>Adds a new student to the dictionary</li>
+                        <li>Updates the age of one of the students</li>
+                        <li>Prints all students and their ages in the format "Name: Age"</li>
+                        <li>Calculates and prints the average age of all students</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 5.3: Working with Sets</h4>
+                    <p>Write a program that:</p>
+                    <ol>
+                        <li>Creates two sets: one with numbers divisible by 2 from 1 to 20, and another with numbers divisible by 3 from 1 to 20</li>
+                        <li>Prints both sets</li>
+                        <li>Prints numbers that are divisible by both 2 and 3 (intersection)</li>
+                        <li>Prints numbers that are divisible by 2 or 3 (union)</li>
+                        <li>Prints numbers that are divisible by 2 but not by 3 (difference)</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 5.4: Contact Manager</h4>
+                    <p>Create a simple contact manager program that:</p>
+                    <ol>
+                        <li>Starts with an empty dictionary to store contacts</li>
+                        <li>Provides a menu with options to:
+                            <ul>
+                                <li>Add a new contact (name, phone, email)</li>
+                                <li>View all contacts</li>
+                                <li>Search for a contact by name</li>
+                                <li>Update a contact's information</li>
+                                <li>Delete a contact</li>
+                                <li>Exit the program</li>
+                            </ul>
+                        </li>
+                        <li>Use appropriate data structures to store contact information efficiently</li>
+                    </ol>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 5.5: Word Frequency Counter</h4>
+                    <p>Write a program that:</p>
+                    <ol>
+                        <li>Asks the user to enter a sentence or paragraph</li>
+                        <li>Splits the text into words (ignoring punctuation and case)</li>
+                        <li>Counts how many times each word appears in the text</li>
+                        <li>Prints each word along with its frequency, sorted by frequency (most frequent first)</li>
+                    </ol>
+                </div>
+            </section>
+            
+            <section id="chapter5-mcq">
+                <h3>Knowledge Check</h3>
+                
+                <div class="mcq-container">
+                    <h4>Question 1: Which of the following is NOT a mutable data structure in Python?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) List</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) Dictionary</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) Set</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">D) Tuple</div>
+                    <div id="feedback21" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 2: What will the following code output?</h4>
+                    <pre><code>fruits = ["apple", "banana", "cherry"]
+fruits.append("date")
+fruits.insert(0, "apricot")
+fruits.remove("banana")
+print(fruits)</code></pre>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) ['apple', 'cherry', 'date']</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">B) ['apricot', 'apple', 'cherry', 'date']</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) ['apricot', 'banana', 'apple', 'cherry', 'date']</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) ['apple', 'banana', 'cherry', 'date']</div>
+                    <div id="feedback22" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 3: What is the correct way to create an empty dictionary?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) dict()</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) {}</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">C) Both A and B are correct</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) [] </div>
+                    <div id="feedback23" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 4: What will be the output of the following code?</h4>
+                    <pre><code>set1 = {1, 2, 3}
+set2 = {3, 4, 5}
+print(set1 & set2)</code></pre>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) {1, 2, 3, 4, 5}</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">B) {3}</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) {1, 2, 4, 5}</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) Error</div>
+                    <div id="feedback24" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 5: Which of the following statements about tuples is TRUE?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) Tuples can be modified after creation</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) Tuples can only contain numbers</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">C) Tuples can be used as dictionary keys</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) Tuples are always faster than lists</div>
+                    <div id="feedback25" class="hidden"></div>
+                </div>
+            </section>
+        </section>
+        
+        <section id="chapter6">
+            <h2>Chapter 6: Functions</h2>
+            <p>Functions are one of the most important concepts in programming. They allow you to organize your code into reusable blocks, making your programs more modular, readable, and maintainable. In this chapter, we'll learn how to create and use functions in Python.</p>
+            
+            <section id="defining-functions">
+                <h3>Defining Functions</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Function</h4>
+                    <p>A function is a block of organized, reusable code that performs a specific task. Functions help break down complex problems into smaller, more manageable pieces.</p>
+                </div>
+                
+                <h4>Basic Function Syntax</h4>
+                <p>The basic syntax for defining a function in Python is:</p>
+                
+                <pre><code>def function_name(parameters):
+    # Function body
+    # Code to execute
+    return value  # Optional</code></pre>
+                
+                <div class="example">
+                    <h4>Example: Simple Function</h4>
+                    <pre><code>def greet():
+    print("Hello, World!")
+
+# Calling the function
+greet()  # Output: Hello, World!</code></pre>
+                </div>
+                
+                <h4>Functions with Parameters</h4>
+                <p>Parameters are variables that receive values when the function is called. They allow functions to work with different data each time they're used.</p>
+                
+                <div class="example">
+                    <h4>Example: Function with Parameters</h4>
+                    <pre><code>def greet(name):
+    print(f"Hello, {name}!")
+
+# Calling the function with different arguments
+greet("Alice")  # Output: Hello, Alice!
+greet("Bob")    # Output: Hello, Bob!</code></pre>
+                </div>
+                
+                <h4>Functions with Multiple Parameters</h4>
+                
+                <div class="example">
+                    <h4>Example: Function with Multiple Parameters</h4>
+                    <pre><code>def add_numbers(a, b):
+    return a + b
+
+# Calling the function
+result = add_numbers(5, 3)
+print(result)  # Output: 8
+
+# Using the function with different arguments
+print(add_numbers(10, 20))  # Output: 30
+print(add_numbers(3.14, 2.86))  # Output: 6.0</code></pre>
+                </div>
+                
+                <h4>Default Parameters</h4>
+                <p>You can provide default values for parameters, which will be used if no argument is provided when calling the function.</p>
+                
+                <div class="example">
+                    <h4>Example: Function with Default Parameters</h4>
+                    <pre><code>def greet(name="World"):
+    print(f"Hello, {name}!")
+
+# Calling with an argument
+greet("Alice")  # Output: Hello, Alice!
+
+# Calling without an argument (uses default)
+greet()  # Output: Hello, World!</code></pre>
+                </div>
+                
+                <h4>Keyword Arguments</h4>
+                <p>When calling a function, you can specify which parameter each argument corresponds to using keyword arguments.</p>
+                
+                <div class="example">
+                    <h4>Example: Using Keyword Arguments</h4>
+                    <pre><code>def describe_person(name, age, city):
+    print(f"{name} is {age} years old and lives in {city}.")
+
+# Using positional arguments
+describe_person("Alice", 30, "New York")
+
+# Using keyword arguments
+describe_person(age=25, name="Bob", city="Los Angeles")
+
+# Mixing positional and keyword arguments
+describe_person("Charlie", city="Chicago", age=35)</code></pre>
+                </div>
+                
+                <div class="note">
+                    <h4>Note About Parameter Order</h4>
+                    <p>When mixing positional and keyword arguments, positional arguments must come before keyword arguments. This is a Python syntax requirement.</p>
+                </div>
+            </section>
+            
+            <section id="parameters">
+                <h3>Parameters and Return Values</h3>
+                
+                <h4>Return Values</h4>
+                <p>The <code>return</code> statement is used to exit a function and return a value to the caller. A function can return any type of data, including multiple values as a tuple.</p>
+                
+                <div class="example">
+                    <h4>Example: Functions with Return Values</h4>
+                    <pre><code>def square(number):
+    return number ** 2
+
+# Using the return value
+result = square(5)
+print(result)  # Output: 25
+
+# Using the function directly in an expression
+print(square(3) + square(4))  # Output: 25 (9 + 16)
+
+# Function returning multiple values
+def get_dimensions():
+    width = 1920
+    height = 1080
+    return width, height  # Returns a tuple
+
+# Unpacking the returned values
+w, h = get_dimensions()
+print(f"Width: {w}, Height: {h}")  # Output: Width: 1920, Height: 1080</code></pre>
+                </div>
+                
+                <h4>Variable Scope</h4>
+                <p>Variables defined inside a function are local to that function and cannot be accessed from outside. Variables defined outside all functions are global and can be accessed from any function.</p>
+                
+                <div class="example">
+                    <h4>Example: Variable Scope</h4>
+                    <pre><code># Global variable
+message = "Hello"
+
+def greet():
+    # Local variable
+    name = "Alice"
+    print(f"{message}, {name}!")
+
+def another_function():
+    # This would cause an error because 'name' is not accessible here
+    # print(name)
+    print(message)  # This works because 'message' is global
+
+greet()  # Output: Hello, Alice!
+another_function()  # Output: Hello</code></pre>
+                </div>
+                
+                <h4>Using the global Keyword</h4>
+                <p>If you need to modify a global variable inside a function, you must declare it as global.</p>
+                
+                <div class="example">
+                    <h4>Example: Using global Variables</h4>
+                    <pre><code>counter = 0
+
+def increment():
+    global counter
+    counter += 1
+    print(f"Counter is now {counter}")
+
+increment()  # Output: Counter is now 1
+increment()  # Output: Counter is now 2
+print(counter)  # Output: 2</code></pre>
+                </div>
+                
+                <div class="warning">
+                    <h4>Best Practice: Minimize Global Variables</h4>
+                    <p>While global variables can be useful, it's generally better to pass data to functions as parameters and return values. This makes your code more modular and easier to test.</p>
+                </div>
+            </section>
+            
+            <section id="built-in-functions">
+                <h3>Built-in vs. User-Defined Functions</h3>
+                
+                <h4>Built-in Functions</h4>
+                <p>Python comes with many built-in functions that are always available. Here are some commonly used ones:</p>
+                
+                <div class="example">
+                    <h4>Example: Common Built-in Functions</h4>
+                    <pre><code># len() - Get the length of a sequence
+print(len("Hello"))  # Output: 5
+print(len([1, 2, 3]))  # Output: 3
+
+# max() and min() - Find maximum and minimum values
+print(max(1, 2, 3))  # Output: 3
+print(min([4, 2, 8, 1]))  # Output: 1
+
+# sum() - Sum all items in a sequence
+print(sum([1, 2, 3, 4]))  # Output: 10
+
+# round() - Round a number to a specified precision
+print(round(3.14159, 2))  # Output: 3.14
+
+# abs() - Get the absolute value
+print(abs(-5))  # Output: 5
+
+# type() - Get the type of an object
+print(type("Hello"))  # Output: <class 'str'>
+print(type(42))  # Output: <class 'int'></code></pre>
+                </div>
+                
+                <h4>User-Defined Functions</h4>
+                <p>User-defined functions are functions that you create yourself. They can be as simple or complex as needed.</p>
+                
+                <div class="example">
+                    <h4>Example: User-Defined Functions</h4>
+                    <pre><code>def calculate_rectangle_area(length, width):
+    """Calculate the area of a rectangle."""
+    return length * width
+
+def is_even(number):
+    """Check if a number is even."""
+    return number % 2 == 0
+
+def format_name(first_name, last_name):
+    """Format a person's full name."""
+    return f"{first_name} {last_name}".title()
+
+# Using the functions
+print(calculate_rectangle_area(5, 3))  # Output: 15
+print(is_even(4))  # Output: True
+print(format_name("john", "doe"))  # Output: John Doe</code></pre>
+                </div>
+                
+                <h4>Docstrings</h4>
+                <p>Docstrings are string literals that appear as the first statement in a function. They are used to document what the function does.</p>
+                
+                <div class="example">
+                    <h4>Example: Function with Docstring</h4>
+                    <pre><code>def calculate_circle_area(radius):
+    """
+    Calculate the area of a circle.
+    
+    Args:
+        radius (float): The radius of the circle
+        
+    Returns:
+        float: The area of the circle
+    """
+    import math
+    return math.pi * radius ** 2
+
+# Accessing the docstring
+print(calculate_circle_area.__doc__)</code></pre>
+                </div>
+            </section>
+            
+            <section id="importing">
+                <h3>Importing Libraries</h3>
+                
+                <div class="definition">
+                    <h4>Definition: Module</h4>
+                    <p>A module is a file containing Python code that can be imported and used in other Python programs. Modules help organize code and make it reusable.</p>
+                </div>
+                
+                <h4>Importing Modules</h4>
+                <p>There are several ways to import modules in Python:</p>
+                
+                <div class="example">
+                    <h4>Example: Different Ways to Import</h4>
+                    <pre><code># Import the entire module
+import math
+print(math.pi)  # Output: 3.141592653589793
+
+# Import specific items from a module
+from random import randint, choice
+print(randint(1, 10))  # Output: Random number between 1 and 10
+print(choice(['apple', 'banana', 'cherry']))  # Output: Random item from the list
+
+# Import with an alias
+import datetime as dt
+print(dt.datetime.now())  # Output: Current date and time
+
+# Import all items from a module (not recommended)
+from math import *
+print(sqrt(16))  # Output: 4.0</code></pre>
+                </div>
+                
+                <h4>Creating Your Own Modules</h4>
+                <p>You can create your own modules by saving Python code in a .py file and importing it in other programs.</p>
+                
+                <div class="example">
+                    <h4>Example: Creating and Using a Custom Module</h4>
+                    <p>First, create a file named <code>geometry.py</code>:</p>
+                    <pre><code># geometry.py
+import math
+
+def circle_area(radius):
+    return math.pi * radius ** 2
+
+def rectangle_area(length, width):
+    return length * width
+
+def triangle_area(base, height):
+    return 0.5 * base * height</code></pre>
+                    
+                    <p>Then, in another file, you can import and use these functions:</p>
+                    <pre><code>import geometry
+
+# Using the imported functions
+print(geometry.circle_area(5))  # Output: 78.53981633974483
+print(geometry.rectangle_area(4, 6))  # Output: 24
+print(geometry.triangle_area(3, 8))  # Output: 12.0</code></pre>
+                </div>
+                
+                <h4>Common Python Modules</h4>
+                <p>Python comes with many useful built-in modules. Here are some commonly used ones:</p>
+                <ul>
+                    <li><code>math</code>: Mathematical functions and constants</li>
+                    <li><code>random</code>: Random number generation</li>
+                    <li><code>datetime</code>: Date and time handling</li>
+                    <li><code>os</code>: Operating system interface</li>
+                    <li><code>sys</code>: System-specific parameters and functions</li>
+                    <li><code>json</code>: JSON data handling</li>
+                    <li><code>csv</code>: CSV file handling</li>
+                </ul>
+                
+                <div class="example">
+                    <h4>Example: Using Common Modules</h4>
+                    <pre><code>import math
+import random
+import datetime
+import os
+
+# Math functions
+print(math.sqrt(16))  # Output: 4.0
+print(math.sin(math.pi/2))  # Output: 1.0
+
+# Random numbers
+print(random.randint(1, 100))  # Output: Random number between 1 and 100
+print(random.choice(['red', 'green', 'blue']))  # Output: Random color
+
+# Date and time
+now = datetime.datetime.now()
+print(now.strftime("%Y-%m-%d %H:%M:%S"))  # Output: Current date and time
+
+# File operations
+print(os.getcwd())  # Output: Current working directory
+print(os.listdir())  # Output: List of files in current directory</code></pre>
+                </div>
+            </section>
+            
+            <section id="chapter6-exercises">
+                <h3>Exercises</h3>
+                
+                <div class="exercise">
+                    <h4>Exercise 6.1: Basic Functions</h4>
+                    <p>Write a program that includes the following functions:</p>
+                    <ol>
+                        <li>A function that takes a name as input and returns a greeting</li>
+                        <li>A function that calculates the area of a rectangle</li>
+                        <li>A function that checks if a number is prime</li>
+                        <li>A function that returns the factorial of a number</li>
+                    </ol>
+                    <p>Test each function with different inputs.</p>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 6.2: Temperature Converter Module</h4>
+                    <p>Create a module called <code>temperature.py</code> with functions to:</p>
+                    <ol>
+                        <li>Convert Celsius to Fahrenheit</li>
+                        <li>Convert Fahrenheit to Celsius</li>
+                        <li>Convert Celsius to Kelvin</li>
+                        <li>Convert Kelvin to Celsius</li>
+                    </ol>
+                    <p>Then create a main program that imports and uses these functions to convert temperatures based on user input.</p>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 6.3: Calculator Functions</h4>
+                    <p>Write a program that implements a simple calculator with the following functions:</p>
+                    <ul>
+                        <li>add(x, y)</li>
+                        <li>subtract(x, y)</li>
+                        <li>multiply(x, y)</li>
+                        <li>divide(x, y)</li>
+                        <li>power(x, y)</li>
+                    </ul>
+                    <p>Create a menu-driven interface that allows the user to choose an operation and input the numbers.</p>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 6.4: String Manipulation Functions</h4>
+                    <p>Create a module with functions to:</p>
+                    <ol>
+                        <li>Count the number of vowels in a string</li>
+                        <li>Reverse a string</li>
+                        <li>Check if a string is a palindrome</li>
+                        <li>Count the frequency of each character in a string</li>
+                    </ol>
+                    <p>Write a program that demonstrates the use of these functions.</p>
+                </div>
+                
+                <div class="exercise">
+                    <h4>Exercise 6.5: List Processing Functions</h4>
+                    <p>Write a program with functions to:</p>
+                    <ol>
+                        <li>Find the maximum and minimum values in a list</li>
+                        <li>Calculate the average of numbers in a list</li>
+                        <li>Remove duplicates from a list</li>
+                        <li>Sort a list in ascending and descending order</li>
+                    </ol>
+                    <p>Test these functions with different lists of numbers.</p>
+                </div>
+            </section>
+            
+            <section id="chapter6-mcq">
+                <h3>Knowledge Check</h3>
+                
+                <div class="mcq-container">
+                    <h4>Question 1: What is the output of the following code?</h4>
+                    <pre><code>def greet(name="World"):
+    return f"Hello, {name}!"
+
+print(greet())
+print(greet("Alice"))</code></pre>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) Hello, World! Hello, Alice!</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">B) Hello, World!<br>Hello, Alice!</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) Hello, Alice!<br>Hello, World!</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) Error</div>
+                    <div id="feedback26" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 2: Which of the following is NOT a valid way to import a module in Python?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) import math</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) from math import sqrt</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) import math as m</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">D) include math</div>
+                    <div id="feedback27" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 3: What will be the output of the following code?</h4>
+                    <pre><code>def modify_list(lst):
+    lst.append(4)
+    return lst
+
+numbers = [1, 2, 3]
+modify_list(numbers)
+print(numbers)</code></pre>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) [1, 2, 3]</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">B) [1, 2, 3, 4]</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">C) [4]</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) Error</div>
+                    <div id="feedback28" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 4: Which of the following statements about functions is TRUE?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) A function can only return one value</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) Function parameters must have default values</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">C) A function can return multiple values as a tuple</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) Functions cannot call other functions</div>
+                    <div id="feedback29" class="hidden"></div>
+                </div>
+                
+                <div class="mcq-container">
+                    <h4>Question 5: What is the purpose of a docstring in a function?</h4>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">A) To make the function run faster</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">B) To prevent errors in the function</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, true)">C) To document what the function does</div>
+                    <div class="mcq-option" onclick="checkAnswer(this, false)">D) To make the function return a value</div>
+                    <div id="feedback30" class="hidden"></div>
+                </div>
+            </section>
+        </section>
+        
+        <section id="conclusion">
+            <h2>Conclusion and Next Steps</h2>
+            <p>Congratulations on completing this comprehensive guide to Python programming! You've learned the fundamental concepts and skills needed to write Python programs, including:</p>
+            <ul>
+                <li>Setting up your Python development environment</li>
+                <li>Understanding Python syntax and basic data types</li>
+                <li>Working with variables, operators, and expressions</li>
+                <li>Using control structures like conditionals and loops</li>
+                <li>Manipulating data structures like lists, dictionaries, sets, and tuples</li>
+                <li>Creating and using functions</li>
+                <li>Importing and using modules</li>
+            </ul>
+            
+            <h3>Next Steps in Your Python Journey</h3>
+            <p>Here are some suggestions for continuing your Python learning journey:</p>
+            
+            <h4>1. Practice, Practice, Practice</h4>
+            <p>The best way to improve your programming skills is through regular practice. Try to:</p>
+            <ul>
+                <li>Complete all the exercises in this guide</li>
+                <li>Modify the examples to experiment with different approaches</li>
+                <li>Create your own small projects based on your interests</li>
+            </ul>
+            
+            <h4>2. Explore Python Libraries</h4>
+            <p>Python has a rich ecosystem of libraries for various purposes:</p>
+            <ul>
+                <li><strong>Data Science</strong>: NumPy, Pandas, Matplotlib</li>
+                <li><strong>Web Development</strong>: Flask, Django</li>
+                <li><strong>Game Development</strong>: Pygame</li>
+                <li><strong>GUI Development</strong>: Tkinter, PyQt</li>
+                <li><strong>Machine Learning</strong>: Scikit-learn, TensorFlow, PyTorch</li>
+            </ul>
+            
+            <h4>3. Learn About Object-Oriented Programming</h4>
+            <p>While this guide focused on procedural programming, Python also supports object-oriented programming (OOP). Consider learning about:</p>
+            <ul>
+                <li>Classes and objects</li>
+                <li>Inheritance and polymorphism</li>
+                <li>Encapsulation and abstraction</li>
+            </ul>
+            
+            <h4>4. Study Error Handling and Debugging</h4>
+            <p>As your programs become more complex, you'll need to handle errors gracefully:</p>
+            <ul>
+                <li>Learn about try-except blocks</li>
+                <li>Understand different types of exceptions</li>
+                <li>Practice debugging techniques</li>
+            </ul>
+            
+            <h4>5. Explore File I/O and Data Persistence</h4>
+            <p>Learn how to work with files and databases:</p>
+            <ul>
+                <li>Reading and writing text files</li>
+                <li>Working with CSV and JSON data</li>
+                <li>Using SQLite or other databases</li>
+            </ul>
+            
+            <h4>6. Join the Python Community</h4>
+            <p>Connect with other Python learners and developers:</p>
+            <ul>
+                <li>Participate in online forums like Stack Overflow</li>
+                <li>Join Python-related Discord servers or Slack channels</li>
+                <li>Attend local Python meetups or conferences</li>
+                <li>Contribute to open-source Python projects</li>
+            </ul>
+            
+            <div class="note">
+                <h4>Final Note</h4>
+                <p>Remember that learning to program is a journey, not a destination. Don't be discouraged by challenges or errors - they're opportunities to learn and grow. Keep coding, keep experimenting, and most importantly, have fun!</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>© 2025 Python Programming for Visually Impaired Students. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        // Enhanced feedback system with ARIA live regions
+        function checkAnswer(element, isCorrect) {
+            const container = element.parentElement;
+            const existingFeedback = container.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+            
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            feedback.setAttribute('role', 'alert');
+            feedback.setAttribute('aria-live', 'polite');
+            
+            if (isCorrect) {
+                element.classList.add('correct-answer');
+                feedback.textContent = 'Correct! Well done!';
+                feedback.style.color = '#34A853';
+            } else {
+                element.classList.add('wrong-answer');
+                feedback.textContent = 'Incorrect. Please try again!';
+                feedback.style.color = '#EA4335';
+            }
+            
+            container.insertBefore(feedback, element.nextSibling);
+            
+            // Announce feedback to screen readers
+            const announcement = document.createElement('div');
+            announcement.setAttribute('aria-live', 'polite');
+            announcement.setAttribute('aria-atomic', 'true');
+            announcement.textContent = feedback.textContent;
+            document.body.appendChild(announcement);
+            
+            setTimeout(() => {
+                feedback.remove();
+                announcement.remove();
+                element.classList.remove('correct-answer', 'wrong-answer');
+            }, 3000);
+        }
+        
+        // Add keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+                const activeElement = document.activeElement;
+                if (activeElement.classList.contains('mcq-option')) {
+                    e.preventDefault();
+                    const isCorrect = activeElement.getAttribute('data-correct') === 'true';
+                    checkAnswer(activeElement, isCorrect);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
